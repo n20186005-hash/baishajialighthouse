@@ -1,0 +1,39 @@
+---
+import Logo from './Logo.astro';
+import { site } from '../data/site';
+---
+
+<footer class="border-t border-ocean/10 bg-ocean-deep text-white">
+  <div class="site-shell grid gap-10 py-14 md:grid-cols-[1.2fr_.8fr] md:items-end">
+    <div>
+      <div class="inline-block rounded-2xl bg-white p-3 text-ink">
+        <Logo />
+      </div>
+      <p class="mt-6 max-w-xl text-sm leading-7 text-white/70">
+        以旅客實際規劃需求整理白沙岬燈塔的參觀、交通、拍照與周邊路線。本站為獨立旅遊資訊網站，非政府機關或燈塔官方網站。
+      </p>
+    </div>
+    <div class="md:text-right">
+      <nav class="flex flex-wrap gap-x-5 gap-y-2 text-sm font-bold text-white/85 md:justify-end" aria-label="頁尾導覽">
+        <a class="hover:text-white" href="/about/">關於本站</a>
+        <a class="hover:text-white" href="/photo-credits/">照片授權</a>
+        <a class="hover:text-white" href="/privacy/">隱私權</a>
+      </nav>
+      <p class="mt-5 text-xs leading-6 text-white/50">
+        © {new Date().getFullYear()} {site.domain}
+      </p>
+    </div>
+  </div>
+</footer>
+
+<nav class="fixed inset-x-3 bottom-3 z-50 grid grid-cols-3 overflow-hidden rounded-2xl border border-white/70 bg-ocean-deep/95 p-1 text-white shadow-2xl backdrop-blur-xl md:hidden" aria-label="快速操作">
+  <a class="focus-ring rounded-xl px-2 py-2 text-center text-xs font-extrabold" href="/#visit">
+    <span class="block text-base" aria-hidden="true">◷</span>開放資訊
+  </a>
+  <a class="focus-ring rounded-xl bg-white px-2 py-2 text-center text-xs font-extrabold text-ocean-deep" href="https://www.google.com/maps/dir/?api=1&destination=25.041313,121.076243" target="_blank" rel="noopener noreferrer">
+    <span class="block text-base" aria-hidden="true">⌖</span>導航前往
+  </a>
+  <a class="focus-ring rounded-xl px-2 py-2 text-center text-xs font-extrabold" href="/#route">
+    <span class="block text-base" aria-hidden="true">≈</span>半日行程
+  </a>
+</nav>

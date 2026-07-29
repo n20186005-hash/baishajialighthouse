@@ -1,0 +1,50 @@
+---
+import Logo from './Logo.astro';
+
+const navItems = [
+  { href: '/#visit', label: '參觀資訊' },
+  { href: '/#story', label: '百年故事' },
+  { href: '/#photos', label: '拍照指南' },
+  { href: '/#route', label: '海線行程' },
+  { href: '/#faq', label: '常見問題' },
+];
+---
+
+<header class="sticky top-0 z-50 border-b border-ocean/10 bg-foam/90 backdrop-blur-xl">
+  <div class="site-shell flex h-[var(--header-height)] items-center justify-between gap-5">
+    <Logo compact />
+
+    <nav aria-label="主要導覽" class="hidden items-center gap-1 lg:flex">
+      {navItems.map((item) => (
+        <a class="focus-ring rounded-full px-4 py-2 text-sm font-bold text-ink/75 transition hover:bg-white hover:text-ocean" href={item.href}>
+          {item.label}
+        </a>
+      ))}
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <a
+        class="focus-ring hidden rounded-full border border-ocean/20 bg-white px-4 py-2 text-sm font-extrabold text-ocean shadow-sm transition hover:-translate-y-0.5 hover:shadow-md sm:inline-flex"
+        href="https://www.google.com/maps/dir/?api=1&destination=25.041313,121.076243"
+        rel="noopener noreferrer"
+        target="_blank"
+        aria-label="在 Google 地圖開啟白沙岬燈塔導航（另開新視窗）"
+      >
+        開啟導航
+      </a>
+
+      <details class="relative lg:hidden">
+        <summary class="focus-ring grid h-11 w-11 cursor-pointer list-none place-items-center rounded-full border border-ocean/20 bg-white text-ocean [&::-webkit-details-marker]:hidden" aria-label="開啟選單">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </summary>
+        <nav class="absolute right-0 mt-3 w-56 overflow-hidden rounded-2xl border border-ocean/10 bg-paper p-2 shadow-2xl" aria-label="行動版導覽">
+          {navItems.map((item) => (
+            <a class="focus-ring block rounded-xl px-4 py-3 text-sm font-bold hover:bg-ocean-soft" href={item.href}>{item.label}</a>
+          ))}
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>

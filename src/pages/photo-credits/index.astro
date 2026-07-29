@@ -1,0 +1,97 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const photos = [
+  {
+    file: 'hero.webp、og-baishajia.jpg',
+    title: '白沙岬燈塔與老樹取景',
+    author: 'Leeilan54',
+    license: 'CC BY-SA 4.0',
+    source: 'https://commons.wikimedia.org/wiki/File:%E6%9D%8E%E5%AE%9C%E8%98%AD-%E7%99%BD%E6%B2%99%E5%B2%AC%E7%87%88%E5%A1%94.jpg',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/',
+  },
+  {
+    file: 'entrance.webp',
+    title: '白沙岬燈塔入口',
+    author: '寺人孟子',
+    license: 'CC BY-SA 4.0',
+    source: 'https://commons.wikimedia.org/wiki/File:%E7%99%BD%E6%B2%99%E5%B2%AC%E7%87%88%E5%A1%94%E5%85%A5%E5%8F%A3.jpg',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/',
+  },
+  {
+    file: 'tower-detail.webp',
+    title: '白沙岬燈塔塔身',
+    author: '寺人孟子',
+    license: 'CC BY-SA 4.0',
+    source: 'https://commons.wikimedia.org/wiki/File:%E7%99%BD%E6%B2%99%E5%B2%AC%E7%87%88%E5%A1%94%E5%A1%94%E8%BA%AB.jpg',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/',
+  },
+  {
+    file: 'tower-modern.webp',
+    title: '白沙岬燈塔塔身近景',
+    author: 'S8321414',
+    license: 'CC BY-SA 4.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Baishajia_Lighthouse_20240720.jpg',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/',
+  },
+  {
+    file: 'chinaberry-tree.webp',
+    title: '白沙岬燈塔百年苦楝樹',
+    author: 'Foxy Who (^∀^)/',
+    license: 'CC BY-SA 3.0',
+    source: 'https://commons.wikimedia.org/wiki/File:%E7%99%BD%E6%B2%99%E5%B2%AC%E7%87%88%E5%A1%94_%E7%99%BE%E5%B9%B4%E8%8B%A6%E6%A5%9D%E6%A8%B9_-_panoramio.jpg',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0/',
+  },
+  {
+    file: 'lighthouse-park.webp',
+    title: '燈塔廣場與園區模型',
+    author: 'Foxy Who (^∀^)/',
+    license: 'CC BY-SA 3.0',
+    source: 'https://commons.wikimedia.org/wiki/File:%E7%87%88%E5%A1%94%E5%BB%A3%E5%A0%B4%E2%94%80%E7%99%BD%E6%B2%99%E5%B2%AC%E7%87%88%E5%A1%94_-_panoramio.jpg',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0/',
+  },
+  {
+    file: 'lighthouse-night.webp',
+    title: '夜間燈塔光束',
+    author: '張雅倫',
+    license: 'CC BY-SA 4.0',
+    source: 'https://commons.wikimedia.org/wiki/File:%E6%A1%83%E5%9C%92%E8%A7%80%E9%9F%B3%E7%99%BD%E6%B2%99%E5%B2%AC%E7%87%88%E5%A1%94.jpg',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/',
+  },
+];
+---
+
+<BaseLayout
+  title="照片授權｜白沙岬燈塔旅遊指南"
+  description="白沙岬燈塔旅遊指南使用照片的作者、來源、授權條款與修改說明。"
+  canonical="/photo-credits/"
+>
+  <section class="section-pad bg-paper">
+    <div class="site-shell max-w-5xl">
+      <p class="eyebrow">照片授權</p>
+      <h1 class="section-title">照片授權</h1>
+      <p class="section-copy">本站首頁照片均為白沙岬燈塔真實影像，原始檔取自 Wikimedia Commons。為改善載入速度與版面呈現，部分照片經裁切、縮放、色彩與 WebP 格式最佳化。</p>
+
+      <div class="mt-12 overflow-hidden rounded-[1.75rem] border border-ocean/10 bg-white">
+        {photos.map((photo) => (
+          <article class="grid gap-4 border-b border-ocean/10 p-6 last:border-0 md:grid-cols-[1fr_.7fr_.7fr] md:items-center">
+            <div>
+              <p class="text-xs font-black tracking-[.12em] text-ocean">{photo.file}</p>
+              <h2 class="mt-2 text-lg font-extrabold">{photo.title}</h2>
+            </div>
+            <div>
+              <p class="text-xs text-ink/45">攝影／上傳者</p>
+              <p class="mt-1 font-bold">{photo.author}</p>
+            </div>
+            <div class="flex flex-wrap gap-2 md:justify-end">
+              <a class="focus-ring rounded-full border border-ocean/20 px-4 py-2 text-xs font-extrabold text-ocean hover:bg-ocean-soft" href={photo.source} target="_blank" rel="noopener noreferrer">原始來源 ↗</a>
+              <a class="focus-ring rounded-full border border-ocean/20 px-4 py-2 text-xs font-extrabold text-ocean hover:bg-ocean-soft" href={photo.licenseUrl} target="_blank" rel="noopener noreferrer">{photo.license} ↗</a>
+            </div>
+          </article>
+        ))}
+      </div>
+      <p class="mt-8 text-sm leading-7 text-ink/55">照片授權頁是本站少數保留外部連結的頁面，用於履行創用 CC 授權的來源與條款標示義務。網站其他主要內容不依賴外部圖片連結。</p>
+      <a class="focus-ring mt-10 inline-flex rounded-full bg-ocean px-6 py-3 text-sm font-extrabold text-white" href="/">返回首頁</a>
+    </div>
+  </section>
+</BaseLayout>

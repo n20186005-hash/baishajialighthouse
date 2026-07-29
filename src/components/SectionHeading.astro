@@ -1,0 +1,16 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  copy?: string;
+  align?: 'left' | 'center';
+}
+
+const { eyebrow, title, copy, align = 'left' } = Astro.props;
+---
+
+<div class:list={[align === 'center' ? 'mx-auto max-w-3xl text-center' : 'max-w-3xl']}>
+  <span class:list={['eyebrow', align === 'center' && 'justify-center before:hidden']}>{eyebrow}</span>
+  <h2 class="section-title">{title}</h2>
+  {copy && <p class:list={['section-copy', align === 'center' && 'mx-auto']}>{copy}</p>}
+</div>

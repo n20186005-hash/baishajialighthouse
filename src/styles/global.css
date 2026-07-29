@@ -1,0 +1,224 @@
+@import "tailwindcss";
+
+@theme {
+  --color-foam: #f7f4ea;
+  --color-paper: #fffdf7;
+  --color-ink: #18313b;
+  --color-ocean: #1e6e80;
+  --color-ocean-deep: #123b49;
+  --color-ocean-soft: #dcebed;
+  --color-pine: #566e5b;
+  --color-sand: #d4a764;
+  --color-line: #d5dfdd;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Microsoft JhengHei", sans-serif;
+}
+
+:root {
+  color-scheme: light;
+  scroll-behavior: smooth;
+  --header-height: 72px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: #f7f4ea;
+  scroll-padding-top: calc(var(--header-height) + 18px);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background:
+    radial-gradient(circle at 12% 0%, rgba(212, 167, 100, 0.14), transparent 32rem),
+    #f7f4ea;
+  color: #18313b;
+  font-family: var(--font-sans);
+  line-height: 1.75;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background: #d4a764;
+  color: #123b49;
+}
+
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: -4rem;
+  z-index: 100;
+  border-radius: 999px;
+  background: #fffdf7;
+  padding: 0.75rem 1rem;
+  box-shadow: 0 12px 30px rgba(18, 59, 73, 0.18);
+  transition: top 160ms ease;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+.site-shell {
+  width: min(1180px, calc(100% - 32px));
+  margin-inline: auto;
+}
+
+.section-pad {
+  padding-block: clamp(4.5rem, 9vw, 8rem);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #1e6e80;
+  font-size: 0.77rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.eyebrow::before {
+  width: 2.75rem;
+  height: 1px;
+  background: #d4a764;
+  content: "";
+}
+
+.display-title {
+  max-width: 12ch;
+  margin: 0;
+  font-size: clamp(3.1rem, 8vw, 7rem);
+  font-weight: 800;
+  letter-spacing: -0.055em;
+  line-height: 0.98;
+  text-wrap: balance;
+}
+
+.section-title {
+  margin: 0.8rem 0 0;
+  font-size: clamp(2.25rem, 5vw, 4.4rem);
+  font-weight: 780;
+  letter-spacing: -0.045em;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+.section-copy {
+  max-width: 42rem;
+  margin: 1.25rem 0 0;
+  color: #51636a;
+  font-size: clamp(1rem, 2vw, 1.15rem);
+}
+
+.soft-card {
+  border: 1px solid rgba(30, 110, 128, 0.13);
+  border-radius: 1.75rem;
+  background: rgba(255, 253, 247, 0.88);
+  box-shadow: 0 20px 60px rgba(18, 59, 73, 0.08);
+  backdrop-filter: blur(12px);
+}
+
+.focus-ring:focus-visible {
+  outline: 3px solid rgba(212, 167, 100, 0.75);
+  outline-offset: 4px;
+}
+
+.photo-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.75rem;
+  background: #dcebed;
+}
+
+.photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 700ms cubic-bezier(.2,.7,.2,1);
+}
+
+.photo-frame:hover img {
+  transform: scale(1.025);
+}
+
+.photo-caption {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 3rem 1.25rem 1.15rem;
+  background: linear-gradient(transparent, rgba(8, 37, 47, 0.78));
+  color: white;
+  font-size: 0.88rem;
+}
+
+.lighthouse-grid {
+  background-image:
+    linear-gradient(rgba(30,110,128,.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(30,110,128,.055) 1px, transparent 1px);
+  background-size: 34px 34px;
+}
+
+@media (max-width: 767px) {
+  :root {
+    --header-height: 64px;
+  }
+
+  .site-shell {
+    width: min(100% - 24px, 1180px);
+  }
+
+  body {
+    padding-bottom: 4.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+#photos .eyebrow {
+  color: #d4a764;
+}
+
+#photos .eyebrow::before {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+#photos .section-copy {
+  color: rgba(255, 255, 255, 0.68);
+}
+
+summary::marker {
+  display: none;
+}
+
+@media (max-width: 639px) {
+  .display-title {
+    font-size: clamp(3.2rem, 18vw, 5.3rem);
+  }
+}

@@ -1,0 +1,23 @@
+---
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+---
+
+<a class="focus-ring inline-flex items-center gap-3 rounded-xl" href="/" aria-label="白沙岬燈塔旅遊指南首頁">
+  <svg class="h-10 w-10 shrink-0" viewBox="0 0 64 64" role="img" aria-hidden="true">
+    <circle cx="32" cy="32" r="30" fill="#fffdf7" stroke="#1e6e80" stroke-width="2" />
+    <path d="M24 51h16l-2.8-29H26.8L24 51Z" fill="#f7f4ea" stroke="#123b49" stroke-width="2.2" />
+    <path d="M25.8 32h12.4M25 41h14" stroke="#d4a764" stroke-width="2" />
+    <path d="M24.5 22h15l-2.5-5h-10l-2.5 5Z" fill="#123b49" />
+    <path d="M21 16.8h22" stroke="#123b49" stroke-width="2" stroke-linecap="round" />
+    <path d="M29 12h6v5h-6z" fill="#fffdf7" stroke="#123b49" stroke-width="2" />
+    <path d="M40 24c5 1 9 3 13 7M24 24c-5 1-9 3-13 7" stroke="#1e6e80" stroke-width="2" stroke-linecap="round" />
+  </svg>
+  <span class:list={["leading-tight", compact ? "hidden sm:block" : "block"]}>
+    <span class="block text-[0.98rem] font-extrabold tracking-[0.08em] text-ink">白沙岬燈塔</span>
+    <span class="block text-[0.67rem] font-semibold tracking-[0.2em] text-ocean">觀音海岸旅遊指南</span>
+  </span>
+</a>

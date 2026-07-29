@@ -1,0 +1,10 @@
+{
+  "name": "白沙岬燈塔旅遊指南",
+  "short_name": "白沙岬燈塔",
+  "lang": "zh-Hant-TW",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f7f4ea",
+  "theme_color": "#123b49",
+  "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}

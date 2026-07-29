@@ -1,0 +1,373 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import { faq, highlights, itinerary, quickFacts, site, timeline } from '../data/site';
+
+const attractionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'TouristAttraction',
+  name: '白沙岬燈塔',
+  alternateName: ['觀音白沙岬燈塔', 'Baishajia Lighthouse'],
+  description: site.description,
+  url: site.url,
+  image: [
+    `${site.url}/images/optimized/hero.webp`,
+    `${site.url}/images/optimized/tower-detail.webp`,
+    `${site.url}/images/optimized/entrance.webp`,
+  ],
+  isAccessibleForFree: true,
+  publicAccess: true,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '光明路216號',
+    addressLocality: '觀音區',
+    addressRegion: '桃園市',
+    postalCode: '328',
+    addressCountry: 'TW',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: site.latitude,
+    longitude: site.longitude,
+  },
+  telephone: site.phone,
+  touristType: ['親子旅客', '攝影愛好者', '文化旅遊者', '自行車旅客'],
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+      opens: '09:00',
+      closes: '17:00',
+    },
+  ],
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
+---
+
+<BaseLayout>
+  <script type="application/ld+json" set:html={JSON.stringify(attractionSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+  <section class="relative min-h-[calc(100svh-var(--header-height))] overflow-hidden bg-ocean-deep text-white">
+    <img
+      src="/images/optimized/hero.webp"
+      alt="綠蔭與老樹之間的白沙岬燈塔"
+      width="2000"
+      height="1333"
+      fetchpriority="high"
+      decoding="async"
+      class="absolute inset-0 h-full w-full object-cover object-[62%_48%]"
+    />
+    <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,35,44,.88)_0%,rgba(8,35,44,.58)_48%,rgba(8,35,44,.08)_100%)]"></div>
+    <div class="absolute inset-0 bg-[linear-gradient(0deg,rgba(8,35,44,.68)_0%,transparent_42%)]"></div>
+
+    <div class="site-shell relative flex min-h-[calc(100svh-var(--header-height))] items-end pb-10 pt-24 md:items-center md:pb-20">
+      <div class="max-w-3xl">
+        <p class="mb-5 flex items-center gap-3 text-xs font-extrabold tracking-[0.24em] text-white/75">
+          <span class="h-px w-12 bg-sand"></span>桃園・觀音海岸
+        </p>
+        <h1 class="display-title text-white">白沙岬<br />燈塔</h1>
+        <p class="mt-7 max-w-2xl text-lg font-medium leading-8 text-white/85 md:text-xl">
+          走進綠蔭庭院，遇見一座仍為航海守望的百年白塔。開放時間、交通停車、拍照位置與海線行程，一頁完成規劃。
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a class="focus-ring inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-extrabold text-ocean-deep shadow-xl transition hover:-translate-y-1" href="#visit">
+            查看參觀資訊
+            <span aria-hidden="true">↓</span>
+          </a>
+          <a class="focus-ring inline-flex items-center gap-2 rounded-full border border-white/35 bg-white/10 px-6 py-3.5 text-sm font-extrabold text-white backdrop-blur-md transition hover:bg-white/20" href="#route">
+            規劃海線半日遊
+          </a>
+        </div>
+      </div>
+
+      <div class="absolute bottom-9 right-0 hidden items-center gap-3 border-l border-white/30 pl-5 text-xs tracking-[0.16em] text-white/65 xl:flex">
+        <span class="h-12 w-px bg-white/30"></span>
+        <span class="[writing-mode:vertical-rl]">25.0413° N · 121.0762° E</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="visit" class="relative z-10 -mt-1 bg-foam pb-16 pt-8 md:-mt-10 md:rounded-t-[3rem] md:pb-24 md:pt-12">
+    <div class="site-shell">
+      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+        {quickFacts.map((fact) => (
+          <article class="soft-card min-h-40 p-5">
+            <p class="text-xs font-extrabold tracking-[0.14em] text-ocean">{fact.label}</p>
+            <p class="mt-5 text-xl font-extrabold tracking-tight text-ink">{fact.value}</p>
+            <p class="mt-2 text-sm leading-6 text-ink/55">{fact.note}</p>
+          </article>
+        ))}
+      </div>
+
+      <div class="mt-8 grid gap-5 lg:grid-cols-[1.3fr_.7fr]">
+        <article class="soft-card overflow-hidden p-6 md:p-9">
+          <div>
+            <p class="eyebrow">今天出發前</p>
+            <h2 class="mt-4 text-3xl font-extrabold tracking-tight md:text-4xl">星期二至星期日<br />09:00–17:00</h2>
+            <p class="mt-4 max-w-xl text-sm leading-7 text-ink/60">
+              星期一休息。庭院與部分展示空間免費參觀，主燈塔室通常不開放。若遇維修、活動或特殊天候，現場可能臨時調整。
+            </p>
+          </div>
+        </article>
+
+        <article class="soft-card p-6 md:p-9">
+          <p class="text-xs font-extrabold tracking-[0.14em] text-ocean">地址</p>
+          <p class="mt-4 text-2xl font-extrabold leading-tight">桃園市觀音區<br />光明路 216 號</p>
+          <p class="mt-3 text-sm text-ink/55">舊址寫法：新坡下 16 號</p>
+          <a class="focus-ring mt-6 inline-flex rounded-full bg-ocean px-5 py-3 text-sm font-extrabold text-white transition hover:bg-ocean-deep" href="https://www.google.com/maps/dir/?api=1&destination=25.041313,121.076243" target="_blank" rel="noopener noreferrer">
+            開啟地圖導航 ↗
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="story" class="section-pad lighthouse-grid border-y border-ocean/10 bg-paper">
+    <div class="site-shell">
+      <SectionHeading
+        eyebrow="值得到訪"
+        title="不只是一座好拍的白色燈塔"
+        copy="白沙岬燈塔同時保存航海技術、磚石建築與海岸生活記憶。從塔身結構到庭院老樹，每一處都值得慢下來看。"
+      />
+
+      <div class="mt-14 grid gap-5 lg:grid-cols-3">
+        {highlights.map((item) => (
+          <article class="group rounded-[2rem] border border-ocean/10 bg-foam p-7 transition hover:-translate-y-1 hover:shadow-xl md:p-9">
+            <div class="flex items-start justify-between gap-5">
+              <span class="text-6xl font-black tracking-[-0.08em] text-ocean/12">{item.number}</span>
+              <span class="mt-2 grid h-12 w-12 place-items-center rounded-full border border-ocean/20 text-ocean transition group-hover:bg-ocean group-hover:text-white" aria-hidden="true">↗</span>
+            </div>
+            <h3 class="mt-8 text-2xl font-extrabold tracking-tight">{item.title}</h3>
+            <p class="mt-4 text-sm leading-7 text-ink/60">{item.body}</p>
+          </article>
+        ))}
+      </div>
+
+      <div class="mt-20 grid gap-8 lg:grid-cols-[.88fr_1.12fr] lg:items-center">
+        <div class="photo-frame aspect-[4/5] min-h-[480px]">
+          <img src="/images/optimized/tower-modern.webp" alt="白沙岬燈塔潔白圓形塔身與黑色燈室" width="1100" height="1467" loading="lazy" decoding="async" />
+          <p class="photo-caption">圓形塔身向上收窄，白牆與深色燈室形成鮮明輪廓。</p>
+        </div>
+        <div class="lg:pl-10">
+          <p class="eyebrow">建築細節</p>
+          <h2 class="section-title">百年磚石工法，<br />仍在海岸守望</h2>
+          <div class="mt-8 space-y-7">
+            <div class="grid grid-cols-[auto_1fr] gap-5 border-b border-ocean/10 pb-7">
+              <span class="text-sm font-black text-sand">01</span>
+              <div>
+                <h3 class="text-xl font-extrabold">雙同心圓塔體</h3>
+                <p class="mt-2 text-sm leading-7 text-ink/60">塔身由內外兩層磚牆構成，中間整合樓梯與機械空間，是臺灣早期燈塔建築中少見的構造。</p>
+              </div>
+            </div>
+            <div class="grid grid-cols-[auto_1fr] gap-5 border-b border-ocean/10 pb-7">
+              <span class="text-sm font-black text-sand">02</span>
+              <div>
+                <h3 class="text-xl font-extrabold">燈器與旋轉機械</h3>
+                <p class="mt-2 text-sm leading-7 text-ink/60">早期法國製透鏡、重錘與旋轉系統，讓燈塔不只是建築，也是一套完整的航海技術見證。</p>
+              </div>
+            </div>
+            <div class="grid grid-cols-[auto_1fr] gap-5">
+              <span class="text-sm font-black text-sand">03</span>
+              <div>
+                <h3 class="text-xl font-extrabold">戰後修復的身影</h3>
+                <p class="mt-2 text-sm leading-7 text-ink/60">燈塔在戰時受損，戰後修復並繼續執行助航任務；如今所見高度與外觀，也承載這段歷史痕跡。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="photos" class="section-pad bg-ocean-deep text-white">
+    <div class="site-shell">
+      <SectionHeading
+        eyebrow="拍照指南"
+        title="從樹影裡，看見白塔"
+        copy="白沙岬燈塔最迷人的畫面，不一定是貼近塔腳仰拍。拉開距離，讓林蔭、道路與天空成為構圖的一部分，更能拍出它在海岸守望的氣氛。"
+      />
+
+      <div class="mt-14 grid auto-rows-[230px] grid-cols-1 gap-4 md:grid-cols-12 md:auto-rows-[260px]">
+        <figure class="photo-frame md:col-span-7 md:row-span-2">
+          <img src="/images/optimized/entrance.webp" alt="從入口道路望向白沙岬燈塔" width="1600" height="1200" loading="lazy" decoding="async" />
+          <figcaption class="photo-caption"><strong>入口林蔭</strong>・用道路形成視線引導，適合拍完整環境。</figcaption>
+        </figure>
+        <figure class="photo-frame md:col-span-5">
+          <img src="/images/optimized/tower-detail.webp" alt="近距離仰望白沙岬燈塔塔身" width="1100" height="1467" loading="lazy" decoding="async" />
+          <figcaption class="photo-caption"><strong>塔身側前方</strong>・微微仰角即可，不必極端廣角。</figcaption>
+        </figure>
+        <figure class="photo-frame md:col-span-5">
+          <img src="/images/optimized/chinaberry-tree.webp" alt="白沙岬燈塔園區內的老苦楝樹" width="1280" height="960" loading="lazy" decoding="async" />
+          <figcaption class="photo-caption"><strong>老樹與庭院</strong>・春季枝葉與花色能柔化白塔線條。</figcaption>
+        </figure>
+        <figure class="photo-frame md:col-span-5">
+          <img src="/images/optimized/lighthouse-park.webp" alt="白沙岬燈塔園區模型與周邊庭院" width="1280" height="960" loading="lazy" decoding="async" />
+          <figcaption class="photo-caption"><strong>園區細節</strong>・補拍日晷、模型與歷史展示，讓旅程更完整。</figcaption>
+        </figure>
+        <figure class="photo-frame md:col-span-7">
+          <img src="/images/optimized/lighthouse-night.webp" alt="夜色中發出光束的白沙岬燈塔" width="1600" height="1067" loading="lazy" decoding="async" />
+          <figcaption class="photo-caption"><strong>航海之光</strong>・燈塔仍執行助航功能；日常參觀請遵守園區開放時間。</figcaption>
+        </figure>
+      </div>
+
+      <div class="mt-10 grid gap-4 md:grid-cols-3">
+        <div class="rounded-2xl border border-white/12 bg-white/5 p-6">
+          <p class="text-xs font-black tracking-[.15em] text-sand">上午</p>
+          <p class="mt-3 font-extrabold">光線清爽、遊客較少</p>
+          <p class="mt-2 text-sm leading-6 text-white/60">適合拍白塔與藍天，也較容易避開團體人潮。</p>
+        </div>
+        <div class="rounded-2xl border border-white/12 bg-white/5 p-6">
+          <p class="text-xs font-black tracking-[.15em] text-sand">午後</p>
+          <p class="mt-3 font-extrabold">樹影更有層次</p>
+          <p class="mt-2 text-sm leading-6 text-white/60">約 15:00 後光線較柔和，可再銜接海岸夕陽。</p>
+        </div>
+        <div class="rounded-2xl border border-white/12 bg-white/5 p-6">
+          <p class="text-xs font-black tracking-[.15em] text-sand">手機鏡頭</p>
+          <p class="mt-3 font-extrabold">先用 1×，再試 2×</p>
+          <p class="mt-2 text-sm leading-6 text-white/60">避免超廣角讓塔身過度變形，退後取景通常更耐看。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-pad bg-paper">
+    <div class="site-shell">
+      <div class="grid gap-14 lg:grid-cols-[.72fr_1.28fr]">
+        <div class="lg:sticky lg:top-28 lg:self-start">
+          <p class="eyebrow">歷史年表</p>
+          <h2 class="section-title">一座燈塔，<br />跨越一世紀</h2>
+          <p class="section-copy">從日治初期航路建設、戰時受損，到今日成為國定古蹟，白沙岬燈塔的生命始終與海岸相連。</p>
+        </div>
+        <ol class="relative border-l border-ocean/20 pl-7 md:pl-12">
+          {timeline.map((item, index) => (
+            <li class:list={['relative pb-12', index === timeline.length - 1 && 'pb-0']}>
+              <span class="absolute -left-[2.15rem] top-1 h-4 w-4 rounded-full border-4 border-paper bg-sand md:-left-[3.55rem]"></span>
+              <div class="grid gap-3 md:grid-cols-[8rem_1fr] md:gap-7">
+                <p class="text-4xl font-black tracking-[-.05em] text-ocean/25">{item.year}</p>
+                <div>
+                  <h3 class="text-xl font-extrabold">{item.title}</h3>
+                  <p class="mt-2 text-sm leading-7 text-ink/60">{item.text}</p>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section id="route" class="section-pad overflow-hidden bg-foam">
+    <div class="site-shell">
+      <SectionHeading
+        eyebrow="半日路線"
+        title="把燈塔，放進一段海岸午後"
+        copy="單看燈塔約一小時；最舒服的方式，是從觀音市區慢慢走向海邊，最後把夕陽留給觀音海岸。"
+        align="center"
+      />
+
+      <div class="relative mt-16">
+        <div class="absolute left-6 top-6 hidden h-px w-[calc(100%_-_3rem)] bg-ocean/15 lg:block"></div>
+        <ol class="relative grid gap-4 lg:grid-cols-4">
+          {itinerary.map((item, index) => (
+            <li class="soft-card relative p-6 md:p-7">
+              <div class="flex items-center justify-between">
+                <span class="grid h-12 w-12 place-items-center rounded-full bg-ocean-deep text-sm font-black text-white">{index + 1}</span>
+                <time class="text-sm font-black text-ocean">{item.time}</time>
+              </div>
+              <h3 class="mt-8 text-xl font-extrabold">{item.title}</h3>
+              <p class="mt-3 text-sm leading-7 text-ink/60">{item.text}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      <div class="mt-16 overflow-hidden rounded-[2rem] bg-ocean-deep text-white shadow-2xl">
+        <div class="grid lg:grid-cols-[1fr_1fr]">
+          <div class="p-7 md:p-12">
+            <p class="eyebrow text-sand before:bg-white/30">交通方式</p>
+            <h2 class="mt-5 text-3xl font-extrabold tracking-tight md:text-5xl">交通與停車</h2>
+            <div class="mt-8 space-y-6">
+              <div>
+                <h3 class="font-extrabold">自駕最方便</h3>
+                <p class="mt-2 text-sm leading-7 text-white/65">直接以「白沙岬燈塔」或座標導航。入口周邊停車空間有限，假日建議上午抵達，並依現場標示停放。</p>
+              </div>
+              <div>
+                <h3 class="font-extrabold">大眾運輸需預留彈性</h3>
+                <p class="mt-2 text-sm leading-7 text-white/65">海線公車班距可能較長，出發當日再確認即時班次。抵達鄰近站點後，步行即可進入園區。</p>
+              </div>
+              <div>
+                <h3 class="font-extrabold">自行車注意海風</h3>
+                <p class="mt-2 text-sm leading-7 text-white/65">可串聯觀音濱海遊憩區，但沿海風勢變化快，並須留意大型車與傍晚視線。</p>
+              </div>
+            </div>
+            <a class="focus-ring mt-9 inline-flex rounded-full bg-white px-6 py-3.5 text-sm font-extrabold text-ocean-deep" href="https://www.google.com/maps/dir/?api=1&destination=25.041313,121.076243" target="_blank" rel="noopener noreferrer">
+              導航至白沙岬燈塔 ↗
+            </a>
+          </div>
+
+          <div class="relative min-h-[430px] overflow-hidden bg-[#dcebed] lg:min-h-[560px]">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.7866639961517!2d121.07366807537673!3d25.04131297781157!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3468289c2b4cbbdb%3A0x3083f9e61d9123cd!2z55m95rKZ5bKs54Gv5aGU!5e0!3m2!1szh-CN!2stw!4v1785313552272!5m2!1szh-CN!2stw"
+              title="白沙岬燈塔 Google 地圖"
+              class="absolute inset-0 h-full w-full border-0"
+              width="600"
+              height="450"
+              allowfullscreen
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="section-pad bg-paper">
+    <div class="site-shell grid gap-12 lg:grid-cols-[.72fr_1.28fr]">
+      <div>
+        <p class="eyebrow">出發之前</p>
+        <h2 class="section-title">出發前，<br />最常被問的事</h2>
+        <p class="section-copy">開放時間與特殊活動可能臨時調整，出發前請再確認現場公告與最新開放狀況。</p>
+      </div>
+      <div class="divide-y divide-ocean/10 border-y border-ocean/10">
+        {faq.map((item, index) => (
+          <details class="group py-1" open={index === 0}>
+            <summary class="focus-ring flex cursor-pointer list-none items-center justify-between gap-5 rounded-xl py-5 font-extrabold [&::-webkit-details-marker]:hidden">
+              <span>{item.q}</span>
+              <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-ocean/20 text-ocean transition group-open:rotate-45" aria-hidden="true">＋</span>
+            </summary>
+            <p class="max-w-2xl pb-6 pr-12 text-sm leading-7 text-ink/60">{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-paper pb-20 md:pb-28">
+    <div class="site-shell">
+      <div class="relative overflow-hidden rounded-[2.5rem] bg-ocean px-7 py-14 text-white md:px-14 md:py-20">
+        <div class="absolute -right-24 -top-24 h-80 w-80 rounded-full border-[42px] border-white/8"></div>
+        <div class="absolute -bottom-24 right-28 h-64 w-64 rounded-full border border-white/15"></div>
+        <div class="relative max-w-3xl">
+          <p class="text-xs font-black tracking-[.2em] text-white/65">桃園觀音・白沙岬燈塔</p>
+          <h2 class="mt-5 text-4xl font-extrabold tracking-[-.045em] md:text-6xl">留一個午後，<br />給白塔與海風。</h2>
+          <p class="mt-6 max-w-2xl text-base leading-8 text-white/75">先看百年燈塔，再走向觀音海岸。行程不用排得太滿，才能看見光影、老樹與海岸之間的細節。</p>
+          <div class="mt-9 flex flex-wrap gap-3">
+            <a class="focus-ring rounded-full bg-white px-6 py-3.5 text-sm font-extrabold text-ocean-deep" href="https://www.google.com/maps/dir/?api=1&destination=25.041313,121.076243" target="_blank" rel="noopener noreferrer">開始導航 ↗</a>
+            <a class="focus-ring rounded-full border border-white/30 px-6 py-3.5 text-sm font-extrabold" href="#visit">再次確認開放資訊</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
