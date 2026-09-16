@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="離線瀏覽｜白沙岬燈塔旅遊指南" description="目前處於離線狀態，僅能顯示已快取的頁面內容。" noindex>
+  <section class="grid min-h-[68svh] place-items-center bg-paper px-6 py-20 text-center">
+    <div>
+      <p class="text-7xl font-black tracking-[-.08em] text-ocean/20">OFFLINE</p>
+      <h1 class="mt-4 text-3xl font-extrabold">目前沒有網路連線</h1>
+      <p class="mt-4 text-ink/55">你仍可瀏覽先前造訪過的快取頁面；連線恢復後即可查看最新的白沙岬燈塔參觀資訊。</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        <button class="focus-ring inline-flex rounded-full bg-ocean px-6 py-3 text-sm font-extrabold text-white" type="button" data-retry>重新載入</button>
+        <a class="focus-ring inline-flex rounded-full border border-ocean/25 px-6 py-3 text-sm font-extrabold text-ocean" href="/">回到白沙岬燈塔</a>
+      </div>
+      <nav class="mt-10 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-bold text-ink/60" aria-label="離線可用頁面">
+        <a class="hover:text-ocean" href="/about/">關於本站</a>
+        <a class="hover:text-ocean" href="/photo-credits/">照片授權</a>
+        <a class="hover:text-ocean" href="/privacy/">隱私權</a>
+      </nav>
+      <p class="mt-6 text-xs leading-6 text-ink/45">離線期間天氣預報與互動地圖需要網路連線，將暫時無法顯示。</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<script is:inline>
+  document.querySelector('[data-retry]')?.addEventListener('click', () => window.location.reload());
+</script>

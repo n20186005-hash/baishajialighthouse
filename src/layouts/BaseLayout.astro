@@ -62,6 +62,7 @@ const websiteSchema = {
     <meta name="twitter:image" content={imageUrl} />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/images/icon-1024.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="preload" as="image" href="/images/optimized/hero.webp" fetchpriority="high" />
 
@@ -83,5 +84,14 @@ const websiteSchema = {
       <slot />
     </main>
     <Footer />
+
+    <script is:inline>
+      // PWA：註冊 Service Worker（離線快取支援）
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').catch(() => {});
+        });
+      }
+    </script>
   </body>
 </html>

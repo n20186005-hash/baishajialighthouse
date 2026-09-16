@@ -1,0 +1,173 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import { describeWeatherCode, getWeather, umbrellaAdvice, type WeatherData } from '../lib/weather';
+
+const weather: WeatherData | null = await getWeather();
+const current = weather?.current;
+const daily = weather?.daily;
+
+const dayLabels = (daily?.time ?? []).map((date, i) => {
+  if (i === 0) return '今天';
+  if (i === 1) return '明天';
+  const d = new Date(`${date}T00:00:00`);
+  return `週${['日', '一', '二', '三', '四', '五', '六'][d.getDay()] ?? ''}`;
+});
+
+const shortDate = (date: string) => `${Number(date.slice(5, 7))}/${Number(date.slice(8, 10))}`;
+const todayProb = daily?.precipitation_probability_max?.[0] ?? 0;
+const hasData = Boolean(weather);
+---
+
+<section id="weather" class="section-pad bg-paper">
+  <div class="site-shell">
+    <SectionHeading
+      eyebrow="即時天氣與預報"
+      title="今天，適合一趟白沙岬嗎？"
+      copy="即時氣溫、降雨與體感，加上未來五日預報——出發前 30 秒，決定要不要帶傘、怎麼穿。"
+    />
+
+    <div class="mt-12 grid gap-5 lg:grid-cols-[.85fr_1.15fr]">
+      <article class="soft-card p-7 md:p-9">
+        <p class="eyebrow">觀音海岸・現在</p>
+        <div data-wx-live class:list={[hasData ? 'mt-6' : 'hidden']}>
+          <div class="flex items-end gap-4">
+            <p class="text-6xl font-black tracking-[-.05em] text-ink md:text-7xl">
+              <span data-wx-temp>{Math.round(current?.temperature_2m ?? 0)}</span><span class="text-3xl font-extrabold text-ink/40">°C</span>
+            </p>
+            <p class="pb-2 text-lg font-extrabold text-ocean" data-wx-desc>{current ? describeWeatherCode(current.weather_code) : '天氣資訊更新中'}</p>
+          </div>
+
+          <p class="mt-6 rounded-2xl bg-foam px-5 py-4 text-sm font-bold leading-6 text-ink/75" data-wx-umbrella>
+            {umbrellaAdvice(current, todayProb)}
+          </p>
+
+          <dl class="mt-7 grid grid-cols-3 gap-4 border-t border-ocean/10 pt-6 text-center">
+            <div>
+              <dt class="text-xs font-extrabold tracking-[.12em] text-ocean">體感</dt>
+              <dd class="mt-2 text-lg font-extrabold text-ink"><span data-wx-feels>{current ? `${Math.round(current.apparent_temperature)}°C` : '–'}</span></dd>
+            </div>
+            <div>
+              <dt class="text-xs font-extrabold tracking-[.12em] text-ocean">濕度</dt>
+              <dd class="mt-2 text-lg font-extrabold text-ink"><span data-wx-humidity>{current ? `${Math.round(current.relative_humidity_2m)}%` : '–'}</span></dd>
+            </div>
+            <div>
+              <dt class="text-xs font-extrabold tracking-[.12em] text-ocean">風速</dt>
+              <dd class="mt-2 text-lg font-extrabold text-ink"><span data-wx-wind>{current ? `${Math.round(current.wind_speed_10m)} km/h` : '–'}</span></dd>
+            </div>
+          </dl>
+        </div>
+
+        {!hasData && (
+          <div data-wx-fallback class="mt-6">
+            <p class="text-2xl font-extrabold tracking-tight text-ink">暫時取得不到觀測資料</p>
+            <p class="mt-3 text-sm leading-7 text-ink/60">
+              桃園海岸天氣變化快：夏季午後常有雷陣雨，秋冬受東北季風影響、海邊風勢明顯。請先參考頁面的季節攻略，並在出發前查詢最新官方預報。
+            </p>
+            <a class="focus-ring mt-5 inline-flex rounded-full bg-ocean px-5 py-2.5 text-xs font-extrabold text-white transition hover:bg-ocean-deep" href="https://www.cwa.gov.tw/" target="_blank" rel="noopener noreferrer">
+              中央氣象署 ↗
+            </a>
+          </div>
+        )}
+      </article>
+
+      <article class="soft-card p-7 md:p-9">
+        <p class="eyebrow">未來五日</p>
+        <div data-wx-live class:list={[hasData ? 'mt-5' : 'hidden']}>
+          {(daily ? daily.time.slice(0, 5) : Array.from({ length: 5 }, (_, i) => String(i))).map((date, i) => (
+            <div class="grid grid-cols-[4.5rem_1fr_auto] items-center gap-4 border-b border-ocean/10 py-4 last:border-0" data-wx-day={i}>
+              <div>
+                <p class="font-extrabold text-ink">{daily ? dayLabels[i] : '–'}</p>
+                <p class="text-xs text-ink/50">{daily ? shortDate(String(date)) : ''}</p>
+              </div>
+              <div>
+                <p class="text-sm font-bold text-ink/80" data-cell="desc">
+                  {daily ? describeWeatherCode(daily.weather_code[i] ?? 0) : '天氣資訊更新中'}
+                </p>
+                <p class="mt-0.5 text-xs text-ink/50" data-cell="prob">降雨機率 {daily ? (daily.precipitation_probability_max[i] ?? 0) : '–'}%</p>
+              </div>
+              <p class="text-sm font-black text-ocean" data-cell="temp">
+                {daily ? `${Math.round(daily.temperature_2m_max[i] ?? 0)}° / ${Math.round(daily.temperature_2m_min[i] ?? 0)}°` : '–'}
+              </p>
+            </div>
+          ))}
+        </div>
+        {!hasData && (
+          <div data-wx-fallback class="mt-5 rounded-2xl border border-ocean/10 bg-foam p-5 text-sm leading-7 text-ink/60">
+            五日預報暫時無法載入。行程安排可先對照頁面的「季節攻略」表，實際天氣請以中央氣象署預報為準。
+          </div>
+        )}
+      </article>
+    </div>
+
+    <p class="mt-6 text-xs text-ink/45">
+      氣象資料來源：Open-Meteo · <span data-weather-updated>頁面載入時自動更新</span> · 每小時自動同步一次 · 沿海天氣多變，出發前請再確認即時預報
+    </p>
+  </div>
+</section>
+
+<script>
+  import { WEATHER_API_URL, describeWeatherCode, umbrellaAdvice, type WeatherData } from '../lib/weather';
+
+  function setText(selector: string, text: string) {
+    document.querySelectorAll(selector).forEach((el) => {
+      el.textContent = text;
+    });
+  }
+
+  function dayLabel(date: string, i: number): string {
+    if (i === 0) return '今天';
+    if (i === 1) return '明天';
+    const d = new Date(`${date}T00:00:00`);
+    return `週${['日', '一', '二', '三', '四', '五', '六'][d.getDay()] ?? ''}`;
+  }
+
+  function shortDate(date: string): string {
+    return `${Number(date.slice(5, 7))}/${Number(date.slice(8, 10))}`;
+  }
+
+  async function refreshWeather() {
+    try {
+      const res = await fetch(WEATHER_API_URL, { cache: 'no-store' });
+      if (!res.ok) return;
+      const data = (await res.json()) as WeatherData;
+      const c = data.current;
+      const d = data.daily;
+
+      setText('[data-wx-temp]', String(Math.round(c.temperature_2m)));
+      setText('[data-wx-desc]', describeWeatherCode(c.weather_code));
+      setText('[data-wx-feels]', `${Math.round(c.apparent_temperature)}°C`);
+      setText('[data-wx-humidity]', `${Math.round(c.relative_humidity_2m)}%`);
+      setText('[data-wx-wind]', `${Math.round(c.wind_speed_10m)} km/h`);
+      setText('[data-wx-umbrella]', umbrellaAdvice(c, d.precipitation_probability_max?.[0] ?? 0));
+
+      for (let i = 0; i < Math.min(5, d.time.length); i++) {
+        const row = document.querySelector(`[data-wx-day="${i}"]`);
+        if (!row) continue;
+        const labelEl = row.querySelector<HTMLParagraphElement>('p.font-extrabold');
+        const dateEl = row.querySelector<HTMLParagraphElement>('p.text-xs');
+        const descEl = row.querySelector('[data-cell="desc"]');
+        const probEl = row.querySelector('[data-cell="prob"]');
+        const tempEl = row.querySelector('[data-cell="temp"]');
+        if (labelEl) labelEl.textContent = dayLabel(d.time[i], i);
+        if (dateEl) dateEl.textContent = shortDate(d.time[i]);
+        if (descEl) descEl.textContent = describeWeatherCode(d.weather_code[i] ?? 0);
+        if (probEl) probEl.textContent = `降雨機率 ${d.precipitation_probability_max[i] ?? 0}%`;
+        if (tempEl) tempEl.textContent = `${Math.round(d.temperature_2m_max[i] ?? 0)}° / ${Math.round(d.temperature_2m_min[i] ?? 0)}°`;
+      }
+
+      const now = new Date();
+      const hh = String(now.getHours()).padStart(2, '0');
+      const mm = String(now.getMinutes()).padStart(2, '0');
+      setText('[data-weather-updated]', `更新於 ${hh}:${mm}`);
+
+      // 首次載入若伺服器端取不到資料，客戶端成功補上後移除降級提示並顯示即時數據
+      document.querySelectorAll('[data-wx-fallback]').forEach((el) => el.remove());
+      document.querySelectorAll('[data-wx-live]').forEach((el) => el.classList.remove('hidden'));
+    } catch {
+      // 離線或網路異常時，保留畫面上最新一次取得的資料
+    }
+  }
+
+  refreshWeather();
+  setInterval(refreshWeather, 30 * 60 * 1000);
+</script>

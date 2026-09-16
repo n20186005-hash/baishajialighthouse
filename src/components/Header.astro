@@ -3,9 +3,12 @@ import Logo from './Logo.astro';
 
 const navItems = [
   { href: '/#visit', label: '參觀資訊' },
+  { href: '/#weather', label: '即時天氣' },
   { href: '/#story', label: '百年故事' },
   { href: '/#photos', label: '拍照指南' },
+  { href: '/#reviews', label: '遊客評價' },
   { href: '/#route', label: '海線行程' },
+  { href: '/#services', label: '服務設施' },
   { href: '/#faq', label: '常見問題' },
 ];
 ---
@@ -16,7 +19,7 @@ const navItems = [
 
     <nav aria-label="主要導覽" class="hidden items-center gap-1 lg:flex">
       {navItems.map((item) => (
-        <a class="focus-ring rounded-full px-4 py-2 text-sm font-bold text-ink/75 transition hover:bg-white hover:text-ocean" href={item.href}>
+        <a class="focus-ring rounded-full px-3 py-2 text-sm font-bold text-ink/75 transition hover:bg-white hover:text-ocean" href={item.href}>
           {item.label}
         </a>
       ))}
