@@ -1,0 +1,140 @@
+---
+import TopicPage from '../../components/TopicPage.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import { site } from '../../data/site';
+
+const spots = [
+  {
+    name: '入口林蔭道路',
+    tag: '環境・引導',
+    body: '從入口道路望向燈塔，用道路形成視線引導，適合拍完整環境與到訪感。',
+  },
+  {
+    name: '塔身側前方',
+    tag: '構圖・仰角',
+    body: '微微仰角即可，不必極端廣角；退後取景通常比貼近塔腳更耐看。',
+  },
+  {
+    name: '老苦楝與庭院',
+    tag: '季節・前景',
+    body: '春季枝葉與花色能柔化白塔線條，是園區最具代表性的前景。',
+  },
+  {
+    name: '園區細節',
+    tag: '補拍・故事',
+    body: '日晷、模型與歷史展示補拍後，能讓燈塔旅程更完整。',
+  },
+  {
+    name: '海岸夕陽',
+    tag: '黃昏・延伸',
+    body: '園區有樹木與建築遮擋，不是最開闊觀海位；看完燈塔再前往觀音濱海遊憩區等海邊拍夕陽。',
+  },
+];
+
+const faqItems = [
+  {
+    q: '什麼時候拍白沙岬燈塔最好？',
+    a: '上午光線清爽、遊客較少，適合拍白塔與藍天；約 15:00 後樹影更有層次，也可再銜接海岸夕陽。避開正午硬光，畫面會更柔和。',
+  },
+  {
+    q: '用手機可以拍好嗎？',
+    a: '可以。建議先用 1× 取景，再試 2×；避免超廣角讓塔身過度變形，退後取景通常更耐看。',
+  },
+  {
+    q: '可以飛空拍機或做商業拍攝嗎？',
+    a: '燈塔為國定古蹟且仍執行助航任務，空拍機起降與商業攝影通常須事先向管理單位申請核准，臨時拍攝請避開其他遊客；臨海起飛另須留意強風、鹽霧與相關民航規定。',
+  },
+  {
+    q: '園區內拍得到夕陽嗎？',
+    a: '園區有樹木與建築遮擋，不是最開闊的觀海位置。較好的安排是先在開放時間內參觀燈塔，再前往附近海岸看夕陽。',
+  },
+];
+
+const related = [
+  { href: '/opening-hours-tickets/', label: '門票與開放時間', desc: '開放時段與休園日。', tag: '門票與開放時間' },
+  { href: '/transportation/', label: '交通與停車', desc: '505 公車與自駕動線。', tag: '交通與停車' },
+  { href: '/nearby-attractions/', label: '周邊景點', desc: '觀音海線一日遊。', tag: '周邊景點' },
+];
+---
+
+<TopicPage
+  title="白沙岬燈塔拍照指南｜最佳拍攝位置、時段光線與空拍提醒"
+  description="白沙岬燈塔怎麼拍？整理園區內外拍攝位置、上午與午後光線、手機與相機建議，以及國定古蹟空拍與商業拍攝的申請提醒。"
+  canonical="/photography/"
+  eyebrow="拍照指南"
+  h1="從樹影裡，看見白塔"
+  faqItems={faqItems}
+  related={related}
+>
+  <section slot="intro" class="mt-7 max-w-2xl text-lg leading-8 text-white/85">
+    白沙岬燈塔最迷人的畫面，不一定是貼近塔腳仰拍。拉開距離，讓林蔭、道路與天空成為構圖的一部分。
+  </section>
+
+  <section class="section-pad bg-paper">
+    <div class="site-shell">
+      <SectionHeading
+        eyebrow="拍攝位置"
+        title="五個值得停下的點"
+        copy="園區範圍不大，但每個點都有不同角色。"
+      />
+      <div class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {spots.map((spot) => (
+          <article class="rounded-[2rem] border border-ocean/10 bg-foam p-7">
+            <span class="inline-flex rounded-full bg-ocean-soft px-3 py-1 text-xs font-extrabold text-ocean">{spot.tag}</span>
+            <h3 class="mt-5 text-xl font-extrabold tracking-tight">{spot.name}</h3>
+            <p class="mt-3 text-sm leading-7 text-ink/60">{spot.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-pad border-y border-ocean/10 bg-foam">
+    <div class="site-shell">
+      <SectionHeading
+        eyebrow="時段與光線"
+        title="什麼時候去拍？"
+        copy="依園區開放時間與光線特性，挑最適合你的時段。"
+      />
+      <div class="mt-12 grid gap-4 md:grid-cols-3">
+        <div class="rounded-2xl border border-ocean/10 bg-paper p-6">
+          <p class="text-xs font-black tracking-[.15em] text-sand">上午</p>
+          <p class="mt-3 font-extrabold">光線清爽、遊客較少</p>
+          <p class="mt-2 text-sm leading-6 text-ink/60">適合拍白塔與藍天，也較容易避開團體人潮。</p>
+        </div>
+        <div class="rounded-2xl border border-ocean/10 bg-paper p-6">
+          <p class="text-xs font-black tracking-[.15em] text-sand">午後</p>
+          <p class="mt-3 font-extrabold">樹影更有層次</p>
+          <p class="mt-2 text-sm leading-6 text-ink/60">約 15:00 後光線較柔和，可再銜接海岸夕陽。</p>
+        </div>
+        <div class="rounded-2xl border border-ocean/10 bg-paper p-6">
+          <p class="text-xs font-black tracking-[.15em] text-sand">手機鏡頭</p>
+          <p class="mt-3 font-extrabold">先用 1×，再試 2×</p>
+          <p class="mt-2 text-sm leading-6 text-ink/60">避免超廣角讓塔身過度變形，退後取景通常更耐看。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-pad bg-paper">
+    <div class="site-shell max-w-3xl">
+      <SectionHeading
+        eyebrow="拍攝提醒"
+        title="古蹟與助航任務"
+        copy="白沙岬燈塔為國定古蹟，且仍執行助航任務，拍攝時請留意相關規範。"
+      />
+      <ul class="mt-8 space-y-4 text-sm leading-7 text-ink/70">
+        <li class="flex gap-3"><span class="mt-3 h-1.5 w-1.5 shrink-0 rounded-full bg-sand" aria-hidden="true"></span>空拍機起降與商業攝影通常須事先向管理單位申請核准。</li>
+        <li class="flex gap-3"><span class="mt-3 h-1.5 w-1.5 shrink-0 rounded-full bg-sand" aria-hidden="true"></span>臨時拍攝請避開其他遊客，保持動線順暢。</li>
+        <li class="flex gap-3"><span class="mt-3 h-1.5 w-1.5 shrink-0 rounded-full bg-sand" aria-hidden="true"></span>臨海起飛須留意強風、鹽霧與相關民航規定。</li>
+        <li class="flex gap-3"><span class="mt-3 h-1.5 w-1.5 shrink-0 rounded-full bg-sand" aria-hidden="true"></span>遵守開放時間與導覽動線，夜間不逗留。</li>
+      </ul>
+      <div class="mt-10 rounded-[2rem] bg-ocean-deep p-7 text-white md:p-9">
+        <p class="text-xs font-extrabold tracking-[.14em] text-sand">導航與開放時間</p>
+        <p class="mt-4 text-2xl font-extrabold leading-tight">先看開放時間，再安排拍攝</p>
+        <p class="mt-3 text-sm text-white/70">每週一休園，夏冬收園時間不同；詳見門票與開放時間專頁。</p>
+        <a class="focus-ring mt-6 inline-flex rounded-full bg-white px-5 py-3 text-sm font-extrabold text-ocean-deep" href="/opening-hours-tickets/">查看開放時間 →</a>
+      </div>
+    </div>
+  </section>
+</TopicPage>

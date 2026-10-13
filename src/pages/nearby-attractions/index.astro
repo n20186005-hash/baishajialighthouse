@@ -1,0 +1,136 @@
+---
+import TopicPage from '../../components/TopicPage.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import { itinerary, fullDayItinerary, site } from '../../data/site';
+
+const nearby = [
+  {
+    name: '觀音濱海遊憩區',
+    tag: '海岸・風機',
+    body: '距燈塔約 10 分鐘車程，有風力發電機、潮間帶與開闊海景，是看完燈塔後看夕陽的首選。',
+  },
+  {
+    name: '甘泉寺',
+    tag: '信仰・老廟',
+    body: '觀音地區的信仰中心，相傳與「觀音」地名由來相關；市區用餐與補給也多集中於此。',
+  },
+  {
+    name: '草漯沙丘',
+    tag: '地景・沙丘',
+    body: '桃園海岸線的沙丘地景，步行較費體力，適合喜歡自然觀察與攝影的旅客。',
+  },
+  {
+    name: '新屋石滬',
+    tag: '文化・漁業',
+    body: '新屋區的石滬文化景觀，見證沿海漁業生活方式，可與海岸行程串接。',
+  },
+  {
+    name: '永安漁港',
+    tag: '漁港・海鮮',
+    body: '505 濱海觀光公車的端點之一，有漁港風光與海鮮餐飲類型，適合安排用餐。',
+  },
+];
+
+const faqItems = [
+  {
+    q: '白沙岬燈塔附近還能去哪裡？',
+    a: '最順路的是觀音濱海遊憩區與甘泉寺；若安排一日遊，可再串聯草漯沙丘、新屋石滬或永安漁港。',
+  },
+  {
+    q: '觀音一日遊怎麼安排？',
+    a: '建議上午先參觀白沙岬燈塔，中午回到觀音市區用餐並走訪甘泉寺，下午前往草漯沙丘與觀音濱海遊憩區，最後留在海岸看夕陽。請依潮汐、天候與同行成員體力調整。',
+  },
+  {
+    q: '適合親子或推車嗎？',
+    a: '燈塔庭院與主要步道多為平緩路面，適合親子散步與推車；周邊海岸與沙丘則需注意防曬、風勢與濕滑。',
+  },
+  {
+    q: '怎麼在景點之間移動？',
+    a: '自駕最彈性；無自駕可搭乘 505 濱海觀光公車串接觀音市區、燈塔與永安漁港，但海線班距較長，請先查詢動態班次。',
+  },
+];
+
+const related = [
+  { href: '/transportation/', label: '交通與停車', desc: '505 公車與自駕動線。', tag: '交通與停車' },
+  { href: '/opening-hours-tickets/', label: '門票與開放時間', desc: '免費參觀與夏冬時段。', tag: '門票與開放時間' },
+  { href: '/photography/', label: '拍照指南', desc: '最佳拍攝位置與時段。', tag: '拍照指南' },
+];
+---
+
+<TopicPage
+  title="白沙岬燈塔周邊景點｜觀音濱海遊憩區、甘泉寺與海線一日遊"
+  description="白沙岬燈塔周邊怎麼玩？整理觀音濱海遊憩區、甘泉寺、草漯沙丘、新屋石滬與永安漁港，以及半日與全日海線路線，規劃桃園觀音一日遊。"
+  canonical="/nearby-attractions/"
+  eyebrow="周邊景點"
+  h1="看完燈塔，往海邊走"
+  faqItems={faqItems}
+  related={related}
+>
+  <section slot="intro" class="mt-7 max-w-2xl text-lg leading-8 text-white/85">
+    白沙岬燈塔不是孤島景點。往觀音市區與海岸延伸，半天到一天都排得滿滿的。
+  </section>
+
+  <section class="section-pad bg-paper">
+    <div class="site-shell">
+      <SectionHeading
+        eyebrow="順遊清單"
+        title="五個值得串接的點"
+        copy="從燈塔出發，由近到遠，挑適合自己的組合。"
+      />
+      <div class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {nearby.map((spot) => (
+          <article class="rounded-[2rem] border border-ocean/10 bg-foam p-7">
+            <span class="inline-flex rounded-full bg-ocean-soft px-3 py-1 text-xs font-extrabold text-ocean">{spot.tag}</span>
+            <h3 class="mt-5 text-xl font-extrabold tracking-tight">{spot.name}</h3>
+            <p class="mt-3 text-sm leading-7 text-ink/60">{spot.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-pad border-y border-ocean/10 bg-foam">
+    <div class="site-shell">
+      <SectionHeading
+        eyebrow="半日路線"
+        title="把燈塔放進一段海岸午後"
+        copy="單看燈塔約一小時；最舒服的方式，是從觀音市區慢慢走向海邊。"
+      />
+      <ol class="relative mt-12 grid gap-4 lg:grid-cols-4">
+        {itinerary.map((item, index) => (
+          <li class="soft-card relative p-6 md:p-7">
+            <div class="flex items-center justify-between">
+              <span class="grid h-12 w-12 place-items-center rounded-full bg-ocean-deep text-sm font-black text-white">{index + 1}</span>
+              <time class="text-sm font-black text-ocean">{item.time}</time>
+            </div>
+            <h3 class="mt-8 text-xl font-extrabold">{item.title}</h3>
+            <p class="mt-3 text-sm leading-7 text-ink/60">{item.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section-pad bg-paper">
+    <div class="site-shell">
+      <SectionHeading
+        eyebrow="全日深度版"
+        title="約 8 小時・開車串聯"
+        copy="時間更寬裕，把沙丘與漁港也收進來。"
+      />
+      <ol class="mt-12 grid gap-4 md:grid-cols-3">
+        {fullDayItinerary.map((item) => (
+          <li class="rounded-2xl border border-ocean/10 bg-foam p-5">
+            <div class="flex items-center justify-between">
+              <span class="text-sm font-black text-ocean">{item.time}</span>
+              <span class="text-xs font-extrabold tracking-[.12em] text-ink/40">全天</span>
+            </div>
+            <h4 class="mt-4 font-extrabold">{item.title}</h4>
+            <p class="mt-2 text-sm leading-6 text-ink/60">{item.text}</p>
+          </li>
+        ))}
+      </ol>
+      <p class="mt-6 text-xs leading-6 text-ink/45">行程時間為建議節奏，請依天候、潮汐與體力調整；草漯沙丘步行較費體力，請評估同行成員狀況。</p>
+    </div>
+  </section>
+</TopicPage>

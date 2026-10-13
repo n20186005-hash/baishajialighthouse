@@ -1,0 +1,136 @@
+---
+import TopicPage from '../../components/TopicPage.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import { seasonalHours, weeklyClosure, site, googleRating } from '../../data/site';
+
+const faqItems = [
+  {
+    q: '白沙岬燈塔需要門票嗎？門票多少錢？',
+    a: '目前參觀免費，庭院與展示空間皆免費開放，並未販售門票，也不需要事先購票或預約。若遇文化活動或特別導覽，收費與報名方式請以主辦單位公告為準。',
+  },
+  {
+    q: '為什麼搜尋會看到「白沙岬燈塔票券資訊」？',
+    a: '燈塔本身免費參觀、不販售門票，因此沒有官方票券可買。網路上出現的套票或多點通行證多屬第三方行程或周邊收費設施，與燈塔入園無關，購買前請確認內容。',
+  },
+  {
+    q: '白沙岬燈塔星期一有開嗎？',
+    a: '每週一休園。開放時間分為兩季：4 月 1 日至 10 月 31 日為 09:00–18:00（夏季），11 月 1 日至隔年 3 月 31 日為 09:00–17:00（冬季）。開放狀況可能因維修、活動或特殊天候臨時調整。',
+  },
+  {
+    q: '可以登塔嗎？主燈塔室有開放嗎？',
+    a: '一般開放範圍以燈塔庭院與展示設施為主，主燈塔室通常不開放，也不能常態登塔。若遇文化活動或特別導覽，請以現場公告為準。',
+  },
+  {
+    q: '建議停留多久？',
+    a: '只逛庭院與展示空間約 40 至 70 分鐘即可；若加上拍照、樹蔭休息與看完展示，抓 1.5 小時較從容。想再看海，可往下銜接觀音濱海遊憩區安排半日行程。',
+  },
+];
+
+const related = [
+  { href: '/transportation/', label: '交通與停車', desc: '505 公車、自駕導航與停車位置。', tag: '交通與停車' },
+  { href: '/history/', label: '歷史與古蹟', desc: '百年國定古蹟的故事。', tag: '歷史與古蹟' },
+  { href: '/nearby-attractions/', label: '周邊景點', desc: '觀音海線一日遊路線。', tag: '周邊景點' },
+];
+---
+
+<TopicPage
+  title="白沙岬燈塔門票與開放時間｜免費參觀、夏冬時段與每週一休園"
+  description="白沙岬燈塔免費參觀、不需預約，也沒有官方門票可買。整理夏冬開放時間、每週一休園、登塔狀況與參觀範圍，出發前一次看清楚。"
+  canonical="/opening-hours-tickets/"
+  eyebrow="門票與開放時間"
+  h1="免費參觀，但看準時間"
+  faqItems={faqItems}
+  related={related}
+>
+  <section slot="intro" class="mt-7 max-w-2xl text-lg leading-8 text-white/85">
+    白沙岬燈塔不販售門票、參觀免費，真正要注意的是<strong class="text-white">開放時段與每週一休園</strong>。以下整理季節時間與參觀範圍。
+  </section>
+
+  <section class="section-pad bg-paper">
+    <div class="site-shell">
+      <SectionHeading
+        eyebrow="先說結論"
+        title="免費、免預約、週一休"
+        copy="庭院與展示空間免費開放，不需要購票或事先預約。"
+      />
+      <div class="mt-10 grid gap-5 md:grid-cols-3">
+        <article class="soft-card p-7">
+          <p class="text-xs font-extrabold tracking-[.14em] text-ocean">參觀費用</p>
+          <p class="mt-4 text-3xl font-extrabold tracking-tight">免費</p>
+          <p class="mt-3 text-sm leading-7 text-ink/60">庭院與展示空間皆免費，無官方門票。</p>
+        </article>
+        <article class="soft-card p-7">
+          <p class="text-xs font-extrabold tracking-[.14em] text-ocean">休園日</p>
+          <p class="mt-4 text-3xl font-extrabold tracking-tight">每週一</p>
+          <p class="mt-3 text-sm leading-7 text-ink/60">遇連續假期或特殊活動以現場公告為準。</p>
+        </article>
+        <article class="soft-card p-7">
+          <p class="text-xs font-extrabold tracking-[.14em] text-ocean">登塔狀況</p>
+          <p class="mt-4 text-3xl font-extrabold tracking-tight">通常不可</p>
+          <p class="mt-3 text-sm leading-7 text-ink/60">主燈塔室一般不開放，僅庭院與展示。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-pad border-y border-ocean/10 bg-foam">
+    <div class="site-shell">
+      <SectionHeading
+        eyebrow="季節開放時間"
+        title="夏冬時段不一樣"
+        copy="依交通部觀光署公開資訊，白沙岬燈塔分為夏季與冬季兩種收園時間。"
+      />
+      <div class="mt-10 overflow-x-auto rounded-[2rem] border border-ocean/10 bg-paper p-2 md:p-4">
+        <table class="w-full min-w-[640px] border-collapse text-left text-sm">
+          <thead>
+            <tr class="text-xs font-extrabold tracking-[.12em] text-ocean">
+              <th class="p-4">季節</th>
+              <th class="p-4">適用期間</th>
+              <th class="p-4">開放時間</th>
+              <th class="p-4">說明</th>
+            </tr>
+          </thead>
+          <tbody>
+            {seasonalHours.map((h) => (
+              <tr class="border-t border-ocean/10 align-top">
+                <td class="p-4 text-base font-extrabold text-ink">{h.season}</td>
+                <td class="p-4 font-black text-ocean">{h.period}</td>
+                <td class="p-4 font-black text-ink">{h.opens}–{h.closes}</td>
+                <td class="p-4 leading-6 text-ink/65">{h.note}</td>
+              </tr>
+            ))}
+            <tr class="border-t border-ocean/10 align-top">
+              <td class="p-4 text-base font-extrabold text-ink">休園</td>
+              <td class="p-4 font-black text-ocean">每週一</td>
+              <td class="p-4 font-black text-ink">—</td>
+              <td class="p-4 leading-6 text-ink/65">{weeklyClosure}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 text-xs leading-6 text-ink/45">開放時間依交通部觀光署公開資訊整理，同步時間 {site.lastUpdated}；實際開放狀況可能因維修、活動或天候臨時調整，請以現場公告為準。</p>
+    </div>
+  </section>
+
+  <section class="section-pad bg-paper">
+    <div class="site-shell max-w-3xl">
+      <SectionHeading
+        eyebrow="參觀範圍"
+        title="免費能看什麼？"
+        copy="免費開放的是戶外庭院與部分展示，核心燈器所在的主燈塔室通常不開放。"
+      />
+      <ul class="mt-8 space-y-4 text-sm leading-7 text-ink/70">
+        <li class="flex gap-3"><span class="mt-3 h-1.5 w-1.5 shrink-0 rounded-full bg-sand" aria-hidden="true"></span>綠蔭庭院、老苦楝樹與環形步道：免費參觀，園區步道平緩。</li>
+        <li class="flex gap-3"><span class="mt-3 h-1.5 w-1.5 shrink-0 rounded-full bg-sand" aria-hidden="true"></span>歷史展示、日晷與園區模型：了解燈塔構造與沿革。</li>
+        <li class="flex gap-3"><span class="mt-3 h-1.5 w-1.5 shrink-0 rounded-full bg-sand" aria-hidden="true"></span>主燈塔室：通常不開放，不能常態登塔。</li>
+        <li class="flex gap-3"><span class="mt-3 h-1.5 w-1.5 shrink-0 rounded-full bg-sand" aria-hidden="true"></span>園區洗手間：位置與開放狀況依現場標示為準。</li>
+      </ul>
+      <div class="mt-10 rounded-[2rem] bg-ocean-deep p-7 text-white md:p-9">
+        <p class="text-xs font-extrabold tracking-[.14em] text-sand">遊客評價</p>
+        <p class="mt-4 text-3xl font-extrabold tracking-tight">{googleRating.value}<span class="text-xl font-extrabold text-white/40"> / 5</span></p>
+        <p class="mt-2 text-sm text-white/70">共 {googleRating.reviewCount.toLocaleString('zh-Hant-TW')} 則 Google 地圖用戶評價 · 同步時間 {googleRating.syncedAt}</p>
+        <a class="focus-ring mt-6 inline-flex rounded-full bg-white px-5 py-3 text-sm font-extrabold text-ocean-deep" href={site.mapsShareUrl} target="_blank" rel="noopener noreferrer">在 Google 地圖查看全部評價 ↗</a>
+      </div>
+    </div>
+  </section>
+</TopicPage>

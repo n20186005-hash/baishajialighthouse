@@ -1,0 +1,139 @@
+---
+import TopicPage from '../../components/TopicPage.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import { transport, site } from '../../data/site';
+
+const faqItems = [
+  {
+    q: '505 濱海觀光公車的「白沙岬燈塔」站在哪裡？',
+    a: '505 濱海觀光公車設有「白沙岬燈塔」站，下車後步行即可抵達燈塔入口。路線沿桃園海岸串聯中壢、觀音市區與永安漁港等地，是無自駕旅客最穩定的抵達方式。',
+  },
+  {
+    q: '505 公車班次多久一班？',
+    a: '海線班次較少，平日與假日時刻不同，班距可能超過一小時。出發當日請先查詢桃園市公車動態系統（ebus.tycg.gov.tw）最新班次與發車時間，再排定行程。',
+  },
+  {
+    q: '開車去白沙岬燈塔好停車嗎？',
+    a: '入口周邊設有停車空間，但規模不大，假日中午前就容易滿位。建議上午抵達，或把車停在觀音市區再轉乘公車；停放時請依現場標示，勿擋住住戶出入口與園區動線。',
+  },
+  {
+    q: '可以騎自行車或接續自行車道嗎？',
+    a: '可串聯觀音濱海遊憩區自行車道，但沿海風勢變化快，並須留意大型車與傍晚視線，騎乘時請做好防風與安全防護。',
+  },
+  {
+    q: '從中壢或桃園市區怎麼過去？',
+    a: '自駕可走台 15 線或台 61 線接光明路，以「白沙岬燈塔」或座標 25.041313, 121.076243 導航；無自駕可先到中壢或觀音市區，再轉乘 505 濱海觀光公車前往。',
+  },
+];
+
+const related = [
+  { href: '/opening-hours-tickets/', label: '門票與開放時間', desc: '免費參觀、夏冬時段與每週一休園。', tag: '門票與開放時間' },
+  { href: '/nearby-attractions/', label: '周邊景點', desc: '觀音海線一日遊的順遊路線。', tag: '周邊景點' },
+  { href: '/photography/', label: '拍照指南', desc: '園區內外最佳拍攝位置。', tag: '拍照指南' },
+];
+---
+
+<TopicPage
+  title="白沙岬燈塔交通與停車｜505 公車、自駕導航與停車位置"
+  description="白沙岬燈塔怎麼去？整理 505 濱海觀光公車站點、中壢與永安漁港路線、自駕導航座標、停車位置與自行車建議，規劃桃園觀音海岸行程。"
+  canonical="/transportation/"
+  eyebrow="交通與停車"
+  h1="白沙岬燈塔怎麼去？"
+  faqItems={faqItems}
+  related={related}
+>
+  <section slot="intro" class="mt-7 max-w-2xl text-lg leading-8 text-white/85">
+    無論自駕或搭乘大眾運輸，白沙岬燈塔都能抵達。以下整理最穩定的公車路線、導航座標與停車建議，出發前先看一眼。
+  </section>
+
+  <section class="section-pad bg-paper">
+    <div class="site-shell">
+      <SectionHeading
+        eyebrow="大眾運輸"
+        title="505 濱海觀光公車"
+        copy="沿桃園海岸行駛的觀光公車，是無自駕旅客最穩定的抵達方式。"
+      />
+
+      <div class="mt-10 grid gap-5 lg:grid-cols-3">
+        <article class="soft-card p-7">
+          <p class="text-xs font-extrabold tracking-[.14em] text-ocean">搭乘路線</p>
+          <p class="mt-4 text-2xl font-extrabold tracking-tight">{transport.busRoute}</p>
+          <p class="mt-3 text-sm leading-7 text-ink/60">桃園海岸觀光公車，連接{transport.busConnects.join('、')}等地，適合海線半日遊串接。</p>
+        </article>
+        <article class="soft-card p-7">
+          <p class="text-xs font-extrabold tracking-[.14em] text-ocean">下車站點</p>
+          <p class="mt-4 text-2xl font-extrabold tracking-tight">{transport.busStop}</p>
+          <p class="mt-3 text-sm leading-7 text-ink/60">於「{transport.busStop}」下車後步行即達燈塔入口，不需再轉乘。</p>
+        </article>
+        <article class="soft-card p-7">
+          <p class="text-xs font-extrabold tracking-[.14em] text-ocean">動態時刻</p>
+          <p class="mt-4 text-2xl font-extrabold tracking-tight">出發前查</p>
+          <p class="mt-3 text-sm leading-7 text-ink/60">海線班距較長、平日與假日不同，請以官方動態時刻為準。</p>
+          <a class="focus-ring mt-5 inline-flex rounded-full border border-ocean/20 px-5 py-2.5 text-xs font-extrabold text-ocean transition hover:bg-ocean-soft" href={transport.busDynamicUrl} target="_blank" rel="noopener noreferrer">
+            桃園市公車動態系統 ↗
+          </a>
+        </article>
+      </div>
+
+      <p class="mt-6 text-sm leading-7 text-ink/60">{transport.busNote}</p>
+
+      <div class="mt-10 rounded-[2rem] border border-ocean/10 bg-foam p-7 md:p-9">
+        <p class="eyebrow">導航座標</p>
+        <p class="mt-4 text-2xl font-extrabold leading-tight">25.041313, 121.076243</p>
+        <p class="mt-2 text-sm text-ink/55">桃園市觀音區光明路 216 號</p>
+        <a class="focus-ring mt-6 inline-flex rounded-full bg-ocean px-5 py-3 text-sm font-extrabold text-white transition hover:bg-ocean-deep" href="https://www.google.com/maps/dir/?api=1&destination=25.041313,121.076243" target="_blank" rel="noopener noreferrer">
+          開啟地圖導航 ↗
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-pad border-y border-ocean/10 bg-foam">
+    <div class="site-shell">
+      <SectionHeading
+        eyebrow="自駕與停車"
+        title="停車位置與行車動線"
+        copy="園區停車規模不大，掌握時段與替代方案，旅程會順很多。"
+      />
+      <div class="mt-10 grid gap-5 lg:grid-cols-2">
+        <article class="soft-card p-7 md:p-9">
+          <h3 class="text-xl font-extrabold">開車怎麼走</h3>
+          <p class="mt-4 text-sm leading-7 text-ink/60">{transport.driveNote}</p>
+        </article>
+        <article class="soft-card p-7 md:p-9">
+          <h3 class="text-xl font-extrabold">停車建議</h3>
+          <p class="mt-4 text-sm leading-7 text-ink/60">{transport.parkingNote}</p>
+        </article>
+        <article class="soft-card p-7 md:p-9">
+          <h3 class="text-xl font-extrabold">自行車與海線</h3>
+          <p class="mt-4 text-sm leading-7 text-ink/60">{transport.bikeNote}</p>
+        </article>
+        <article class="soft-card p-7 md:p-9">
+          <h3 class="text-xl font-extrabold">與燈塔行程銜接</h3>
+          <p class="mt-4 text-sm leading-7 text-ink/60">先抵達燈塔停車參觀，再往觀音濱海遊憩區看海；若停車已滿，可停在觀音市區再轉乘 505 公車。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-pad bg-paper">
+    <div class="site-shell max-w-3xl">
+      <SectionHeading
+        eyebrow="抵達之後"
+        title="參觀前先看開放時間"
+        copy="交通與開放時間經常一起規劃，別忘了白沙岬燈塔每週一休園，且夏冬收園時間不同。"
+      />
+      <div class="mt-8 grid gap-4">
+        <a class="group flex items-center justify-between gap-4 rounded-2xl border border-ocean/10 bg-foam px-6 py-5 transition hover:-translate-y-0.5 hover:shadow-md" href="/opening-hours-tickets/">
+          <span class="font-extrabold">門票與開放時間：免費參觀、夏冬時段</span>
+          <span class="text-ocean transition group-hover:translate-x-1">→</span>
+        </a>
+        <a class="group flex items-center justify-between gap-4 rounded-2xl border border-ocean/10 bg-foam px-6 py-5 transition hover:-translate-y-0.5 hover:shadow-md" href="/nearby-attractions/">
+          <span class="font-extrabold">周邊景點：觀音海線一日遊路線</span>
+          <span class="text-ocean transition group-hover:translate-x-1">→</span>
+        </a>
+      </div>
+      <p class="mt-6 text-xs leading-6 text-ink/45">班距與票價可能變動，請以桃園市公車動態系統與現場公告為準；本站為獨立旅遊資訊網站，非政府機關或燈塔官方網站。</p>
+    </div>
+  </section>
+</TopicPage>

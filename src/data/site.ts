@@ -3,9 +3,9 @@ export const site = {
   shortName: '白沙岬燈塔',
   domain: 'BaishajiaLighthouse.com',
   url: 'https://baishajialighthouse.com',
-  title: '白沙岬燈塔參觀指南｜開放時間、免門票、交通停車與周邊景點',
+  title: '白沙岬燈塔攻略｜免費門票、開放時間、交通停車與拍照景點',
   description:
-    '白沙岬燈塔免門票參觀，週二至週日 09:00–17:00（週一休）。整理開車與公車交通、停車、登塔說明、拍照位置、百年歷史，以及草漯沙丘、甘泉寺的觀音海線一日遊路線。',
+    '桃園白沙岬燈塔怎麼去？整理免費參觀資訊、夏冬開放時間、公車交通、停車導航、拍照地點及觀音周邊景點，輕鬆規劃白沙岬燈塔半日遊。',
   address: '桃園市觀音區光明路216號',
   legacyAddress: '桃園市觀音區新坡下16號',
   phone: '03-473-2249',
@@ -15,23 +15,58 @@ export const site = {
   mapsShareUrl: 'https://maps.app.goo.gl/7LjUv7rkmwbJX78D6',
   govTourismUrl: 'https://travel.tycg.gov.tw/',
   taiwanTourismUrl: 'https://www.taiwan.net.tw/',
-  lastUpdated: '2026 年 9 月',
+  lastUpdated: '2026 年 10 月',
 } as const;
 
 // Google 地圖用戶評價同步資料（僅頁面展示，不進 JSON-LD）
 export const googleRating = {
   value: 4.2,
-  reviewCount: 6351,
+  reviewCount: 6382,
   category: '旅遊勝地',
-  syncedAt: '2026 年 9 月',
-  sourceNote: '同步自 Google 地圖用戶評價，同步時間 2026 年 9 月；版權歸原作者與 Google 地圖所有',
+  syncedAt: '2026 年 10 月',
+  sourceNote: '同步自 Google 地圖用戶評價，同步時間 2026 年 10 月；版權歸原作者與 Google 地圖所有',
+} as const;
+
+// 季節開放時間（依交通部觀光署公開資訊：每週一休園）
+// 4/1–10/31 為夏季 09:00–18:00；11/1–隔年 3/31 為冬季 09:00–17:00
+export const seasonalHours = [
+  {
+    season: '夏季',
+    period: '4 月 1 日 – 10 月 31 日',
+    opens: '09:00',
+    closes: '18:00',
+    note: '日照較長，收園時間延後一小時。',
+  },
+  {
+    season: '冬季',
+    period: '11 月 1 日 – 隔年 3 月 31 日',
+    opens: '09:00',
+    closes: '17:00',
+    note: '一般淡季時段。',
+  },
+] as const;
+
+export const weeklyClosure = '每週一休園（遇連續假期或特殊活動以現場公告為準）';
+
+// 大眾運輸與停車（依桃園市公共運輸公開資訊整理；班次與票價可能變動，請以官方動態時刻為準）
+export const transport = {
+  busRoute: '505 濱海觀光公車',
+  busStop: '白沙岬燈塔站',
+  busConnects: ['中壢', '觀音市區', '永安漁港'] as const,
+  busNote:
+    '505 濱海觀光公車沿桃園海岸串聯中壢、觀音市區與永安漁港等地，於「白沙岬燈塔」站下車後步行即達。海線班次較少、平日與假日時刻不同，出發當日請先查詢桃園市公車動態系統最新班次。',
+  parkingNote:
+    '入口周邊設有停車空間，但規模不大，假日中午前就容易滿位；建議上午抵達，或停在觀音市區再轉乘。停放時請依現場標示，勿擋住住戶出入口與園區動線。',
+  bikeNote: '可串聯觀音濱海遊憩區自行車道，但沿海風勢變化快，並須留意大型車與傍晚視線。',
+  driveNote: '以「白沙岬燈塔」或座標 25.041313, 121.076243 導航；自台 15 線或台 61 線接光明路前往。',
+  busDynamicUrl: 'https://ebus.tycg.gov.tw/',
 } as const;
 
 export const nearbyLandmarks = ['觀音濱海遊憩區', '甘泉寺'] as const;
 
 export const quickFacts = [
   { label: '參觀費用', value: '免費', note: '庭院與展示空間' },
-  { label: '開放時間', value: '09:00–17:00', note: '週一休息' },
+  { label: '開放時間', value: '09:00–18:00', note: '夏季（4–10月）；冬季 17:00 · 週一休' },
   { label: '建議停留', value: '40–70 分鐘', note: '搭配海邊約半日' },
   { label: '登塔狀況', value: '通常不可登塔', note: '主燈塔室不開放' },
   { label: '適合族群', value: '親子・攝影・散步', note: '園區步道平緩' },
@@ -83,7 +118,7 @@ export const faq = [
   },
   {
     q: '白沙岬燈塔星期一有開嗎？',
-    a: '依桃園觀光資料，星期一休息，星期二至星期日通常為 09:00 至 17:00。開放狀況可能因維修、活動或天候臨時調整。',
+    a: '依桃園觀光資料，每週一休園。開放時間分為兩季：4 月 1 日至 10 月 31 日為 09:00–18:00（夏季），11 月 1 日至隔年 3 月 31 日為 09:00–17:00（冬季）。開放狀況可能因維修、活動或天候臨時調整，出發前請以現場公告為準。',
   },
   {
     q: '白沙岬燈塔適合帶小孩或推車嗎？',

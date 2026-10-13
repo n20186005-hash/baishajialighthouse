@@ -11,11 +11,14 @@ import {
   quickFacts,
   scienceNotes,
   seasonGuide,
+  seasonalHours,
   site,
   stories,
   timeline,
+  transport,
   visitorRules,
   visitorServices,
+  weeklyClosure,
 } from '../data/site';
 
 const attractionSchema = {
@@ -67,7 +70,17 @@ const attractionSchema = {
       '@type': 'OpeningHoursSpecification',
       dayOfWeek: ['Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
       opens: '09:00',
+      closes: '18:00',
+      validFrom: '--04-01',
+      validThrough: '--10-31',
+    },
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+      opens: '09:00',
       closes: '17:00',
+      validFrom: '--11-01',
+      validThrough: '--03-31',
     },
   ],
 };
@@ -130,9 +143,10 @@ const breadcrumbSchema = {
           <span class="h-px w-12 bg-sand"></span>桃園・觀音海岸
         </p>
         <h1 class="display-title text-white">白沙岬<br />燈塔<span class="mt-5 block text-base font-extrabold tracking-[.32em] text-white/85 md:text-lg">桃園市・觀音區</span></h1>
+        <p class="mt-3 text-xs font-bold tracking-[.18em] text-white/65">Baishajia Lighthouse · Baisha Cape Lighthouse</p>
         <ul class="mt-6 flex flex-wrap gap-2 text-xs font-extrabold md:text-sm">
           <li class="rounded-full border border-white/30 bg-white/12 px-3.5 py-2 text-white backdrop-blur-md">免門票參觀</li>
-          <li class="rounded-full border border-white/30 bg-white/12 px-3.5 py-2 text-white backdrop-blur-md">週二–週日 09:00–17:00</li>
+          <li class="rounded-full border border-white/30 bg-white/12 px-3.5 py-2 text-white backdrop-blur-md">週二–週日 09:00–18:00（夏）</li>
           <li class="rounded-full border border-white/30 bg-white/12 px-3.5 py-2 text-white backdrop-blur-md">週一公休</li>
           <li class="rounded-full border border-white/30 bg-white/12 px-3.5 py-2 text-white backdrop-blur-md">停留 45–90 分鐘</li>
         </ul>
@@ -173,12 +187,20 @@ const breadcrumbSchema = {
         <article class="soft-card overflow-hidden p-6 md:p-9">
           <div>
             <p class="eyebrow">今天出發前</p>
-            <h2 class="mt-4 text-3xl font-extrabold tracking-tight md:text-4xl">星期二至星期日<br />09:00–17:00</h2>
+            <h2 class="mt-4 text-3xl font-extrabold tracking-tight md:text-4xl">星期二至星期日<br />09:00 起開放</h2>
+            <div class="mt-5 space-y-3">
+              {seasonalHours.map((h) => (
+                <div class="flex items-baseline justify-between gap-4 rounded-2xl bg-foam px-4 py-3">
+                  <span class="font-extrabold text-ink">{h.season} <span class="text-xs font-bold text-ink/55">{h.period}</span></span>
+                  <span class="font-black text-ocean">{h.opens}–{h.closes}</span>
+                </div>
+              ))}
+            </div>
             <p class="mt-4 max-w-xl text-sm leading-7 text-ink/60">
-              星期一休息。庭院與部分展示空間免費參觀，主燈塔室通常不開放。若遇維修、活動或特殊天候，現場可能臨時調整。
+              {weeklyClosure}。庭院與部分展示空間免費參觀，主燈塔室通常不開放。若遇維修、活動或特殊天候，現場可能臨時調整。
             </p>
             <p class="mt-5 text-xs font-bold tracking-[.08em] text-ocean">
-              開放與票務資訊更新時間：{site.lastUpdated} · 出發前請以現場公告為準
+              開放與票務資訊更新時間：{site.lastUpdated} · 依交通部觀光署公開資訊 · 出發前請以現場公告為準
             </p>
           </div>
         </article>
@@ -348,16 +370,16 @@ const breadcrumbSchema = {
               ★★★★★
               <span class="absolute inset-0 overflow-hidden whitespace-nowrap text-sand" style="width: 84%;">★★★★★</span>
             </div>
-            <p class="mt-3 text-sm font-extrabold text-ink/75">6,351 則 Google 地圖用戶評價</p>
+            <p class="mt-3 text-sm font-extrabold text-ink/75">6,382 則 Google 地圖用戶評價</p>
             <p class="mt-1 text-sm text-ink/55">Google 地圖分類：旅遊勝地</p>
           </div>
         </div>
         <p class="mt-7 text-xs leading-6 text-ink/50">
-          評分與評價數同步自谷歌地圖（Google Maps）用戶評價 · 2026 年 9 月 ·
+          評分與評價數同步自谷歌地圖（Google Maps）用戶評價 · 2026 年 10 月 ·
           <a class="focus-ring font-bold text-ocean underline decoration-ocean/30 underline-offset-4 transition hover:decoration-ocean" href={site.mapsShareUrl} target="_blank" rel="noopener noreferrer">點擊查看谷歌地圖全部評價↗</a>
         </p>
         <p class="mt-3 border-t border-ocean/10 pt-4 text-xs leading-6 text-ink/50">
-          同步自 Google 地圖用戶評價，同步時間 2026 年 9 月；版權歸原作者與 Google 地圖所有。本站僅引用彙總數據供參考，不代管或改寫任何用戶評論內容。
+          同步自 Google 地圖用戶評價，同步時間 2026 年 10 月；版權歸原作者與 Google 地圖所有。本站僅引用彙總數據供參考，不代管或改寫任何用戶評論內容。
         </p>
         <a class="focus-ring mt-7 inline-flex rounded-full bg-ocean px-6 py-3.5 text-sm font-extrabold text-white transition hover:bg-ocean-deep" href={site.mapsShareUrl} target="_blank" rel="noopener noreferrer">
           在谷歌地圖查看全部評價 ↗
@@ -449,7 +471,10 @@ const breadcrumbSchema = {
               </div>
               <div>
                 <h3 class="font-extrabold">公車怎麼搭</h3>
-                <p class="mt-2 text-sm leading-7 text-white/65">搭往觀音方向的公車或公路客運，在觀音市區一帶下車後步行前往燈塔即可。海線班距可能超過一小時，且平日與假日時刻不同，出發當日請先查詢最新班次再排定時間。</p>
+                <p class="mt-2 text-sm leading-7 text-white/65">搭乘 <strong class="text-white">{transport.busRoute}</strong>，於「{transport.busStop}」下車後步行即達；路線沿桃園海岸串聯{transport.busConnects.join('、')}等地。海線班距可能超過一小時，且平日與假日時刻不同，出發當日請先查詢桃園市公車動態系統最新班次再排定時間。</p>
+                <a class="focus-ring mt-4 inline-flex rounded-full border border-white/35 bg-white/10 px-5 py-2.5 text-xs font-extrabold text-white backdrop-blur-md transition hover:bg-white/20" href="/transportation/">
+                  查看完整交通攻略 →
+                </a>
               </div>
               <div>
                 <h3 class="font-extrabold">自行車注意海風</h3>
@@ -671,9 +696,9 @@ const breadcrumbSchema = {
 
       <div class="mt-12 grid gap-4 md:grid-cols-2">
         <article class="soft-card p-6 md:p-8">
-          <p class="text-xs font-extrabold tracking-[.14em] text-ocean">評價 · 同步時間 2026 年 9 月</p>
+          <p class="text-xs font-extrabold tracking-[.14em] text-ocean">評價 · 同步時間 2026 年 10 月</p>
           <p class="mt-4 text-sm leading-7 text-ink/65">
-            評分 4.2、共 6,351 則評價，同步自 Google 地圖用戶評價，同步時間 2026 年 9 月；版權歸原作者與 Google 地圖所有。
+            評分 4.2、共 6,382 則評價，同步自 Google 地圖用戶評價，同步時間 2026 年 10 月；版權歸原作者與 Google 地圖所有。
           </p>
           <a class="focus-ring mt-6 inline-flex rounded-full border border-ocean/20 px-5 py-2.5 text-xs font-extrabold text-ocean transition hover:bg-ocean-soft" href={site.mapsShareUrl} target="_blank" rel="noopener noreferrer">
             在谷歌地圖查看全部評價 ↗
@@ -711,6 +736,49 @@ const breadcrumbSchema = {
             查看照片授權
           </a>
         </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-pad bg-paper">
+    <div class="site-shell">
+      <SectionHeading
+        eyebrow="深入專題"
+        title="把白沙岬燈塔，一次看懂"
+        copy="針對大家最常搜尋的開放時間、門票、交通、歷史與拍照需求，整理成獨立專頁。"
+      />
+
+      <div class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <a class="group rounded-[2rem] border border-ocean/10 bg-foam p-7 transition hover:-translate-y-1 hover:shadow-xl md:p-9" href="/opening-hours-tickets/">
+          <span class="text-sm font-black tracking-[.14em] text-ocean">門票與開放時間</span>
+          <h3 class="mt-4 text-xl font-extrabold tracking-tight">免費參觀・夏冬時段</h3>
+          <p class="mt-3 text-sm leading-7 text-ink/60">免門票、是否需要預約、哪些區域不開放，以及每週一休園與季節收園時間。</p>
+          <span class="mt-5 inline-flex items-center gap-1 text-sm font-extrabold text-ocean transition group-hover:gap-2">查看專頁 →</span>
+        </a>
+        <a class="group rounded-[2rem] border border-ocean/10 bg-foam p-7 transition hover:-translate-y-1 hover:shadow-xl md:p-9" href="/transportation/">
+          <span class="text-sm font-black tracking-[.14em] text-ocean">交通與停車</span>
+          <h3 class="mt-4 text-xl font-extrabold tracking-tight">505 公車・自駕導航</h3>
+          <p class="mt-3 text-sm leading-7 text-ink/60">505 濱海觀光公車站點、轉乘建議、官方動態時刻連結與停車位置。</p>
+          <span class="mt-5 inline-flex items-center gap-1 text-sm font-extrabold text-ocean transition group-hover:gap-2">查看專頁 →</span>
+        </a>
+        <a class="group rounded-[2rem] border border-ocean/10 bg-foam p-7 transition hover:-translate-y-1 hover:shadow-xl md:p-9" href="/history/">
+          <span class="text-sm font-black tracking-[.14em] text-ocean">歷史與古蹟</span>
+          <h3 class="mt-4 text-xl font-extrabold tracking-tight">百年國定古蹟</h3>
+          <p class="mt-3 text-sm leading-7 text-ink/60">從 1901 年點燈、戰時受損到 2021 年指定國定古蹟，以及建築與守塔故事。</p>
+          <span class="mt-5 inline-flex items-center gap-1 text-sm font-extrabold text-ocean transition group-hover:gap-2">查看專頁 →</span>
+        </a>
+        <a class="group rounded-[2rem] border border-ocean/10 bg-foam p-7 transition hover:-translate-y-1 hover:shadow-xl md:p-9" href="/nearby-attractions/">
+          <span class="text-sm font-black tracking-[.14em] text-ocean">周邊景點</span>
+          <h3 class="mt-4 text-xl font-extrabold tracking-tight">觀音海線一日遊</h3>
+          <p class="mt-3 text-sm leading-7 text-ink/60">觀音濱海遊憩區、甘泉寺、草漯沙丘、新屋石滬與永安漁港的順遊路線。</p>
+          <span class="mt-5 inline-flex items-center gap-1 text-sm font-extrabold text-ocean transition group-hover:gap-2">查看專頁 →</span>
+        </a>
+        <a class="group rounded-[2rem] border border-ocean/10 bg-foam p-7 transition hover:-translate-y-1 hover:shadow-xl md:p-9" href="/photography/">
+          <span class="text-sm font-black tracking-[.14em] text-ocean">拍照指南</span>
+          <h3 class="mt-4 text-xl font-extrabold tracking-tight">最佳拍攝位置</h3>
+          <p class="mt-3 text-sm leading-7 text-ink/60">園區內外取景點、時段光線、手機與相機建議，以及無人機申請提醒。</p>
+          <span class="mt-5 inline-flex items-center gap-1 text-sm font-extrabold text-ocean transition group-hover:gap-2">查看專頁 →</span>
+        </a>
       </div>
     </div>
   </section>

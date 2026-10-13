@@ -1,0 +1,107 @@
+---
+import TopicPage from '../../components/TopicPage.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import { timeline, highlights, stories, site } from '../../data/site';
+
+const faqItems = [
+  {
+    q: '白沙岬燈塔是哪一年點燈的？',
+    a: '白沙岬燈塔於 1901 年（日治初期）正式完工點燈，是當時臺灣西岸重要的航海標誌，至今已超過一百年歷史。',
+  },
+  {
+    q: '白沙岬燈塔是古蹟嗎？',
+    a: '是的。白沙岬燈塔以「觀音白沙岬燈塔」之名，於 2021 年指定為國定古蹟，保存範圍涵蓋塔體與附屬設施。',
+  },
+  {
+    q: '為什麼塔身是雙層磚石構造？',
+    a: '塔身由內外兩層磚牆構成，中間整合樓梯與機械空間，是臺灣早期燈塔建築中少見的構造，也讓它在戰後修復後仍能保存獨特輪廓。',
+  },
+  {
+    q: '燈塔現在還在使用嗎？',
+    a: '白沙岬燈塔仍持續執行助航任務，是臺灣現存少數仍運作的百年燈塔之一；因此部分區域開放與否依管理單位公告為準。',
+  },
+];
+
+const related = [
+  { href: '/opening-hours-tickets/', label: '門票與開放時間', desc: '免費參觀、夏冬時段與休園日。', tag: '門票與開放時間' },
+  { href: '/transportation/', label: '交通與停車', desc: '505 公車與自駕導航。', tag: '交通與停車' },
+  { href: '/nearby-attractions/', label: '周邊景點', desc: '觀音海線一日遊。', tag: '周邊景點' },
+];
+---
+
+<TopicPage
+  title="白沙岬燈塔歷史｜1901 點燈、國定古蹟與百年磚石塔身"
+  description="白沙岬燈塔 1901 年點燈、2021 年指定國定古蹟。整理百年歷史時間軸、雙層磚石塔身建築細節、戰後修復與守塔故事，認識桃園海岸的航海地標。"
+  canonical="/history/"
+  eyebrow="歷史與古蹟"
+  h1="一座燈塔，跨越一世紀"
+  faqItems={faqItems}
+  related={related}
+>
+  <section slot="intro" class="mt-7 max-w-2xl text-lg leading-8 text-white/85">
+    從日治初期的航路建設、戰時受損，到今日成為國定古蹟，白沙岬燈塔的生命始終與桃園海岸相連。
+  </section>
+
+  <section class="section-pad bg-paper">
+    <div class="site-shell">
+      <SectionHeading
+        eyebrow="百年時間軸"
+        title="從點燈到國定古蹟"
+        copy="白沙岬燈塔的身世，是一段與航海、戰爭和地方發展交織的歷史。"
+      />
+      <ol class="relative mt-12 border-l border-ocean/20 pl-7 md:pl-12">
+        {timeline.map((item, index) => (
+          <li class:list={['relative pb-12', index === timeline.length - 1 && 'pb-0']}>
+            <span class="absolute -left-[2.15rem] top-1 h-4 w-4 rounded-full border-4 border-paper bg-sand md:-left-[3.55rem]"></span>
+            <div class="grid gap-3 md:grid-cols-[8rem_1fr] md:gap-7">
+              <p class="text-4xl font-black tracking-[-.05em] text-ocean/25">{item.year}</p>
+              <div>
+                <h3 class="text-xl font-extrabold">{item.title}</h3>
+                <p class="mt-2 text-sm leading-7 text-ink/60">{item.text}</p>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section-pad border-y border-ocean/10 bg-foam">
+    <div class="site-shell">
+      <SectionHeading
+        eyebrow="建築細節"
+        title="百年磚石工法，仍在海岸守望"
+        copy="白沙岬燈塔不只是地標，更是一套完整的航海技術見證。"
+      />
+      <div class="mt-12 grid gap-5 lg:grid-cols-3">
+        {highlights.map((item) => (
+          <article class="group rounded-[2rem] border border-ocean/10 bg-paper p-7 transition hover:-translate-y-1 hover:shadow-xl md:p-9">
+            <span class="text-6xl font-black tracking-[-0.08em] text-ocean/12">{item.number}</span>
+            <h3 class="mt-8 text-2xl font-extrabold tracking-tight">{item.title}</h3>
+            <p class="mt-4 text-sm leading-7 text-ink/60">{item.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-pad bg-paper">
+    <div class="site-shell max-w-3xl">
+      <SectionHeading
+        eyebrow="故事與傳說"
+        title="地名、信仰與守塔人"
+        copy="民間傳說未必有文獻佐證，僅供文化參考；史實部分以文化資產與地方誌公開資料為準。"
+      />
+      <div class="mt-10 grid gap-5">
+        {stories.map((story) => (
+          <article class="rounded-[2rem] border border-ocean/10 bg-foam p-7">
+            <span class="inline-flex rounded-full bg-ocean-soft px-3 py-1 text-xs font-extrabold text-ocean">{story.tag}</span>
+            <h3 class="mt-5 text-lg font-extrabold">{story.title}</h3>
+            <p class="mt-3 text-sm leading-7 text-ink/60">{story.body}</p>
+          </article>
+        ))}
+      </div>
+      <p class="mt-6 text-xs leading-6 text-ink/45">史實部分以文化資產與地方誌公開資料為準；民間傳說僅供文化參考。</p>
+    </div>
+  </section>
+</TopicPage>
