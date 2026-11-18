@@ -1,7 +1,11 @@
 // Workers Static Assets：處理 HTTP → HTTPS 的 301 轉址，其餘請求交由靜態資產處理。
 // 說明：Workers 靜態資產不支援網域級 _redirects，故以 Worker 統一 HTTP/HTTPS。
+interface WorkerEnv {
+  ASSETS: { fetch(request: Request): Promise<Response> };
+}
+
 export default {
-  async fetch(request, env) {
+  async fetch(request: Request, env: WorkerEnv): Promise<Response> {
     const url = new URL(request.url);
     if (url.protocol === 'http:') {
       url.protocol = 'https:';

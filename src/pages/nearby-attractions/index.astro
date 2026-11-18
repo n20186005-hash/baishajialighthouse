@@ -1,35 +1,8 @@
 ---
 import TopicPage from '../../components/TopicPage.astro';
 import SectionHeading from '../../components/SectionHeading.astro';
-import { itinerary, fullDayItinerary, site } from '../../data/site';
-
-const nearby = [
-  {
-    name: '觀音濱海遊憩區',
-    tag: '海岸・風機',
-    body: '距燈塔約 10 分鐘車程，有風力發電機、潮間帶與開闊海景，是看完燈塔後看夕陽的首選。',
-  },
-  {
-    name: '甘泉寺',
-    tag: '信仰・老廟',
-    body: '觀音地區的信仰中心，相傳與「觀音」地名由來相關；市區用餐與補給也多集中於此。',
-  },
-  {
-    name: '草漯沙丘',
-    tag: '地景・沙丘',
-    body: '桃園海岸線的沙丘地景，步行較費體力，適合喜歡自然觀察與攝影的旅客。',
-  },
-  {
-    name: '新屋石滬',
-    tag: '文化・漁業',
-    body: '新屋區的石滬文化景觀，見證沿海漁業生活方式，可與海岸行程串接。',
-  },
-  {
-    name: '永安漁港',
-    tag: '漁港・海鮮',
-    body: '505 濱海觀光公車的端點之一，有漁港風光與海鮮餐飲類型，適合安排用餐。',
-  },
-];
+import { itinerary, fullDayItinerary } from '../../data/site';
+import { nearbyPlaces, nearbyUrl, nearbyMapUrl } from '../../data/nearby';
 
 const faqItems = [
   {
@@ -74,15 +47,17 @@ const related = [
     <div class="site-shell">
       <SectionHeading
         eyebrow="順遊清單"
-        title="五個值得串接的點"
+        title="七個值得串接的點"
         copy="從燈塔出發，由近到遠，挑適合自己的組合。"
       />
       <div class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-        {nearby.map((spot) => (
+        {nearbyPlaces.map((spot) => (
           <article class="rounded-[2rem] border border-ocean/10 bg-foam p-7">
-            <span class="inline-flex rounded-full bg-ocean-soft px-3 py-1 text-xs font-extrabold text-ocean">{spot.tag}</span>
+            <a href={nearbyUrl(spot.slug)} aria-label={`閱讀${spot.name}完整指南`}><img src={spot.image} alt={`${spot.name}實景`} width="1024" height="683" loading="lazy" decoding="async" class="mb-5 aspect-[4/3] w-full rounded-2xl object-cover" /></a>
+            <span class="inline-flex rounded-full bg-ocean-soft px-3 py-1 text-xs font-extrabold text-ocean">{spot.type}</span>
             <h3 class="mt-5 text-xl font-extrabold tracking-tight">{spot.name}</h3>
-            <p class="mt-3 text-sm leading-7 text-ink/60">{spot.body}</p>
+            <p class="mt-3 text-sm leading-7 text-ink/60">{spot.intro}</p>
+            <div class="mt-6 flex flex-wrap gap-4 text-sm font-extrabold text-ocean"><a class="underline" href={nearbyUrl(spot.slug)}>查看完整景點專頁 →</a><a class="underline" href={nearbyMapUrl(spot.name, spot.district)} target="_blank" rel="noopener noreferrer">Google Maps ↗</a></div>
           </article>
         ))}
       </div>

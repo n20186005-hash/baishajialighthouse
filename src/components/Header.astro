@@ -8,6 +8,7 @@ const navItems = [
   { href: '/#photos', label: '拍照指南' },
   { href: '/#reviews', label: '遊客評價' },
   { href: '/#route', label: '海線行程' },
+  { href: '/nearby-attractions/', label: '周邊景點' },
   { href: '/#services', label: '服務設施' },
   { href: '/#faq', label: '常見問題' },
 ];
@@ -17,7 +18,7 @@ const navItems = [
   <div class="site-shell flex h-[var(--header-height)] items-center justify-between gap-5">
     <Logo compact />
 
-    <nav aria-label="主要導覽" class="hidden items-center gap-1 lg:flex">
+    <nav aria-label="主要導覽" class="hidden items-center gap-1 xl:flex">
       {navItems.map((item) => (
         <a class="focus-ring rounded-full px-3 py-2 text-sm font-bold text-ink/75 transition hover:bg-white hover:text-ocean" href={item.href}>
           {item.label}
@@ -36,7 +37,7 @@ const navItems = [
         開啟導航
       </a>
 
-      <details class="relative lg:hidden">
+      <details class="relative xl:hidden">
         <summary class="focus-ring grid h-11 w-11 cursor-pointer list-none place-items-center rounded-full border border-ocean/20 bg-white text-ocean [&::-webkit-details-marker]:hidden" aria-label="開啟選單">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />

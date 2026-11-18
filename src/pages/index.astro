@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import Weather from '../components/Weather.astro';
+import { nearbyPlaces, nearbyUrl } from '../data/nearby';
 import {
   audienceRoutes,
   faq,
@@ -422,6 +423,11 @@ const breadcrumbSchema = {
         copy="單看燈塔約一小時；最舒服的方式，是從觀音市區慢慢走向海邊，最後把夕陽留給觀音海岸。"
         align="center"
       />
+      <nav class="mt-8 flex flex-wrap justify-center gap-3" aria-label="周邊景點獨立指南">
+        {nearbyPlaces.map((place) => (
+          <a class="focus-ring rounded-full border border-ocean/15 bg-paper px-4 py-2 text-sm font-extrabold text-ocean transition hover:bg-ocean-soft" href={nearbyUrl(place.slug)}>{place.name} →</a>
+        ))}
+      </nav>
 
       <div class="relative mt-16">
         <div class="absolute left-6 top-6 hidden h-px w-[calc(100%_-_3rem)] bg-ocean/15 lg:block"></div>

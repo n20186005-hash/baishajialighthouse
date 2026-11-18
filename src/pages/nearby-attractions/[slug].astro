@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import { nearbyPlaces, nearbyMapUrl, nearbyUrl } from '../../data/nearby';
+import { site } from '../../data/site';
+
+export function getStaticPaths() {
+  return nearbyPlaces.map((place) => ({ params: { slug: place.slug }, props: { place } }));
+}
+type Place = (typeof nearbyPlaces)[number];
+const { place } = Astro.props as { place: Place };
+const canonical = nearbyUrl(place.slug);
+const mapUrl = nearbyMapUrl(place.name, place.district);
+const schema = {
+  '@context': 'https://schema.org', '@type': 'TouristAttraction', name: place.name,
+  alternateName: place.english, description: place.intro, url: `${site.url}${canonical}`,
+  image: `${site.url}${place.image}`,
+  address: { '@type': 'PostalAddress', streetAddress: place.district, addressRegion: '桃園市', addressCountry: 'TW' },
+  ...('latitude' in place ? { geo: { '@type': 'GeoCoordinates', latitude: place.latitude, longitude: place.longitude } } : {}),
+  hasMap: mapUrl,
+  subjectOf: { '@type': 'WebPage', url: place.official },
+};
+const breadcrumbs = { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+  { '@type': 'ListItem', position: 1, name: '白沙岬燈塔', item: site.url },
+  { '@type': 'ListItem', position: 2, name: '周邊景點', item: `${site.url}/nearby-attractions/` },
+  { '@type': 'ListItem', position: 3, name: place.name, item: `${site.url}${canonical}` },
+] };
+---
+<BaseLayout title={`${place.name}旅遊攻略｜歷史特色、交通、路線與拍照建議`} description={`${place.name}怎麼玩？整理景點背景、基本資訊、參觀重點、路線、交通導航與拍照建議，串聯白沙岬燈塔觀音海線行程。`} canonical={canonical}>
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbs)} />
+  <section class="bg-ocean-deep py-16 text-white md:py-24">
+    <div class="site-shell">
+      <nav aria-label="位置導覽" class="text-sm text-white/70"><a href="/">白沙岬燈塔</a> / <a href="/nearby-attractions/">周邊景點</a> / {place.name}</nav>
+      <p class="eyebrow mt-10 text-sand">{place.type}</p>
+      <h1 class="mt-5 max-w-4xl text-4xl font-extrabold tracking-tight md:text-6xl">{place.name}</h1>
+      <p class="mt-3 text-lg text-white/65">{place.english}</p>
+      <p class="mt-7 max-w-3xl text-lg leading-8 text-white/85">{place.intro}</p>
+      <div class="mt-8 flex flex-wrap gap-3"><a class="rounded-full bg-white px-6 py-3 font-extrabold text-ocean-deep" href={mapUrl} target="_blank" rel="noopener noreferrer">Google Maps 景點定位 ↗</a><a class="rounded-full border border-white/40 px-6 py-3 font-bold" href="/nearby-attractions/">查看海線其他景點</a></div>
+    </div>
+  </section>
+  <section class="bg-paper pt-10"><div class="site-shell"><figure class="overflow-hidden rounded-[2rem] bg-foam"><img src={place.image} alt={`${place.name}真實景點照片：${place.type}`} width="1024" height="683" loading="eager" decoding="async" class="h-[260px] w-full object-cover md:h-[460px]"/><figcaption class="px-6 py-3 text-xs text-ink/55">{place.name}實景 · 圖片來源：桃園觀光導覽網／政府公開景點圖片</figcaption></figure></div></section>
+  <section class="section-pad bg-paper"><div class="site-shell grid gap-10 lg:grid-cols-[1.2fr_.8fr]">
+    <div><SectionHeading eyebrow="探索景點" title={`為什麼值得走訪${place.name}？`} copy={place.intro}/><h3 class="mt-10 text-xl font-extrabold">遊覽建議</h3><p class="mt-3 leading-8 text-ink/70">{place.access}</p><h3 class="mt-8 text-xl font-extrabold">景區特色與觀察重點</h3><p class="mt-3 leading-8 text-ink/70">{place.detail}</p></div>
+    <aside class="soft-card self-start p-7"><h2 class="text-2xl font-extrabold">基本資訊</h2><dl class="mt-6 space-y-5 text-sm"><div><dt class="font-bold text-ink/50">景點名稱</dt><dd class="mt-1 font-bold">{place.name}</dd></div><div><dt class="font-bold text-ink/50">地址／地點範圍</dt><dd class="mt-1">{place.district}</dd></div><div><dt class="font-bold text-ink/50">景點類型</dt><dd class="mt-1">{place.type}</dd></div><div><dt class="font-bold text-ink/50">開放時間</dt><dd class="mt-1">{place.hours}</dd></div><div><dt class="font-bold text-ink/50">門票價格</dt><dd class="mt-1">{place.admission}</dd></div><div><dt class="font-bold text-ink/50">建議停留</dt><dd class="mt-1">約 30–90 分鐘，依步行距離與天候調整</dd></div></dl><a class="mt-7 inline-block font-extrabold text-ocean underline" href={mapUrl} target="_blank" rel="noopener noreferrer">查看專屬地圖搜尋 ↗</a></aside>
+  </div></section>
+  <section class="section-pad bg-foam"><div class="site-shell"><SectionHeading eyebrow="人文與自然" title="歷史背景與景觀特色"/><div class="mt-10 grid gap-5 md:grid-cols-2"><article class="soft-card p-8"><h3 class="text-xl font-extrabold">歷史與地方文化</h3><p class="mt-4 leading-8 text-ink/70">{place.history}</p></article><article class="soft-card p-8"><h3 class="text-xl font-extrabold">建築、地形與現場觀察</h3><p class="mt-4 leading-8 text-ink/70">{place.detail}</p></article></div></div></section>
+  <section class="section-pad bg-paper"><div class="site-shell"><SectionHeading eyebrow="遊覽路線" title="從白沙岬燈塔順遊的安排" copy="以下是建議順序，並非即時交通或固定班次；請依路況、開放時間與天候調整。"/><ol class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">{place.route.map((step, i) => <li class="soft-card p-7"><span class="text-3xl font-black text-ocean">{String(i+1).padStart(2,'0')}</span><p class="mt-5 leading-7">{step}</p></li>)}</ol></div></section>
+  <section class="section-pad bg-foam"><div class="site-shell grid gap-8 md:grid-cols-2"><div><h2 class="section-title">交通方式與導航</h2><p class="mt-5 leading-8 text-ink/70">{place.access} 自駕請搜尋景點全名與地址「{place.district}」；搭乘大眾運輸請先查<a class="font-bold text-ocean underline" href="https://ebus.tycg.gov.tw/" target="_blank" rel="noopener noreferrer">桃園公車動態</a>。沙丘、石滬與線狀路線須依現場入口標示選擇正確進入點。</p><a class="mt-5 inline-block rounded-full bg-ocean px-6 py-3 font-bold text-white" href={mapUrl} target="_blank" rel="noopener noreferrer">導航至 {place.name} ↗</a></div><div><h2 class="section-title">拍照機位與須知</h2><p class="mt-5 leading-8 text-ink/70">{place.photo}</p><p class="mt-4 leading-8 text-ink/70">海岸天候與場域管理可能改變實際開放範圍；請遵守現場告示，勿越過圍欄或進入工作區域。</p></div></div></section>
+  <section class="section-pad bg-paper"><div class="site-shell"><SectionHeading eyebrow="出發前核對" title="常見問題"/><div class="mt-9 max-w-3xl divide-y divide-ocean/10">{place.faq.map(item => <details class="py-5"><summary class="cursor-pointer font-extrabold">{item.q}</summary><p class="mt-3 leading-8 text-ink/70">{item.a}</p></details>)}</div><p class="mt-9 text-sm leading-7 text-ink/55">資料參考：<a class="text-ocean underline" href={place.official} target="_blank" rel="noopener noreferrer">桃園觀光導覽網相關景點／遊程</a>（2026 年 11 月 18 日查閱）。本站不展示未核實的評分或評論數；最新營業、交通與活動資訊請依來源及現場公告。</p></div></section>
+  <section class="bg-paper pb-24"><div class="site-shell"><a class="inline-flex rounded-full border border-ocean/20 px-6 py-3 font-extrabold text-ocean" href="/nearby-attractions/">← 返回周邊景點總覽</a></div></section>
+</BaseLayout>
