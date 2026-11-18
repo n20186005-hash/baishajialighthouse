@@ -21,10 +21,10 @@ export const site = {
 // Google 地圖用戶評價同步資料（僅頁面展示，不進 JSON-LD）
 export const googleRating = {
   value: 4.2,
-  reviewCount: 6382,
+  reviewCount: 6414,
   category: '旅遊勝地',
-  syncedAt: '2026 年 10 月',
-  sourceNote: '同步自 Google 地圖用戶評價，同步時間 2026 年 10 月；版權歸原作者與 Google 地圖所有',
+  syncedAt: '2026 年 11 月 18 日',
+  sourceNote: '同步自 Google 地圖用戶評價，同步時間 2026 年 11 月 18 日；版權歸原作者與 Google 地圖所有',
 } as const;
 
 // 季節開放時間（依交通部觀光署公開資訊：每週一休園）
