@@ -428,6 +428,14 @@ const breadcrumbSchema = {
           <a class="focus-ring rounded-full border border-ocean/15 bg-paper px-4 py-2 text-sm font-extrabold text-ocean transition hover:bg-ocean-soft" href={nearbyUrl(place.slug)}>{place.name} →</a>
         ))}
       </nav>
+      <div class="mt-10 grid gap-5 md:grid-cols-3" aria-label="周邊游覽精選">
+        {nearbyPlaces.slice(0, 3).map((place) => (
+          <a class="group overflow-hidden rounded-[2rem] border border-ocean/10 bg-paper transition hover:-translate-y-1 hover:shadow-xl" href={nearbyUrl(place.slug)}>
+            <img src={place.image} alt={`${place.name}現場實景`} width="1024" height="683" loading="lazy" decoding="async" class="aspect-[16/10] w-full object-cover" />
+            <div class="p-6"><span class="text-xs font-black tracking-widest text-ocean">{place.type}</span><h3 class="mt-3 text-xl font-extrabold">{place.name}</h3><p class="mt-3 text-sm leading-7 text-ink/60">{place.intro}</p><span class="mt-4 inline-flex text-sm font-extrabold text-ocean">閱讀景點指南 →</span></div>
+          </a>
+        ))}
+      </div>
 
       <div class="relative mt-16">
         <div class="absolute left-6 top-6 hidden h-px w-[calc(100%_-_3rem)] bg-ocean/15 lg:block"></div>
